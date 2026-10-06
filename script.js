@@ -2,7 +2,7 @@ const SUPABASE_URL = "https://pzplzdgdlnjfwbklxbfd.supabase.co";
 const SUPABASE_KEY = "sb_publishable_N3pli21Nl9PtLXeFkiuizg_W5Aw5MpM";
 
 document.getElementById('profile-form').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault(); 
 
     const btn = document.getElementById('submit-btn');
     const statusMsg = document.getElementById('status-message');
@@ -11,16 +11,12 @@ document.getElementById('profile-form').addEventListener('submit', async functio
     btn.disabled = true;
     statusMsg.textContent = "";
 
-    // 1. Gather all the data from the form
     const studentName = document.getElementById('student-name').value;
     
-    // We convert the comma-separated strings back into arrays if they exist
-    const rawHobbies = document.getElementById('hobbies').value;
-    const hobbiesArray = rawHobbies ? rawHobbies.split(',').map(item => item.trim()) : null;
-
+    // UPDATED: Sending everything as plain text to match your database exactly
     const payload = {
         bio: document.getElementById('bio').value || null,
-        hobbies: hobbiesArray,
+        hobbies: document.getElementById('hobbies').value || null,
         interest: document.getElementById('interest').value || null,
         favourite_subject: document.getElementById('favourite_subject').value || null,
         instagram: document.getElementById('instagram').value || null,
@@ -29,8 +25,6 @@ document.getElementById('profile-form').addEventListener('submit', async functio
     };
 
     try {
-        // 2. Send PATCH request to Supabase to update the specific student
-        // The URL uses "?name=eq.StudentName" to find the exact row to update
         const response = await fetch(
             `${SUPABASE_URL}/rest/v1/student?name=eq.${encodeURIComponent(studentName)}`,
             {
@@ -50,7 +44,6 @@ document.getElementById('profile-form').addEventListener('submit', async functio
             throw new Error(errorData);
         }
 
-        // 3. Success state
         statusMsg.textContent = "✨ Profile successfully saved to the magazine!";
         statusMsg.className = "success";
         document.getElementById('profile-form').reset();
