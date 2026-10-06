@@ -20,7 +20,7 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         // The ? safely checks if the element exists before trying to read its value.
         // It will no longer crash your script if there is a typo!
        const payload = {
-            roll_number: document.getElementById('roll_number')?.value || null,
+            roll_no: document.getElementById('roll_no')?.value || null,
             house: document.getElementById('house')?.value || null,
             bio: document.getElementById('bio')?.value || null,
             hobbies: document.getElementById('hobbies')?.value || null,
