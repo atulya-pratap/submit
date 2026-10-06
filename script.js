@@ -19,11 +19,16 @@ document.getElementById('profile-form').addEventListener('submit', async functio
 
         // The ? safely checks if the element exists before trying to read its value.
         // It will no longer crash your script if there is a typo!
-        const payload = {
+       const payload = {
+            roll_number: document.getElementById('roll_number')?.value || null,
+            house: document.getElementById('house')?.value || null,
             bio: document.getElementById('bio')?.value || null,
             hobbies: document.getElementById('hobbies')?.value || null,
-            interests: document.getElementById('interest')?.value || null, // Maps to 'interests' in DB
+            interests: document.getElementById('interest')?.value || null,
             favourite_subject: document.getElementById('favourite_subject')?.value || null,
+            favourite_book: document.getElementById('favourite_book')?.value || null,
+            favourite_movie: document.getElementById('favourite_movie')?.value || null,
+            achievements: document.getElementById('achievements')?.value || null,
             instagram: document.getElementById('instagram')?.value || null,
             favourite_quote: document.getElementById('favourite_quote')?.value || null,
             photo_url: document.getElementById('photo_url')?.value || null
