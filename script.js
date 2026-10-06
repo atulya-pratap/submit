@@ -17,7 +17,7 @@ document.getElementById('profile-form').addEventListener('submit', async functio
     const payload = {
         bio: document.getElementById('bio').value || null,
         hobbies: document.getElementById('hobbies').value || null,
-        interest: document.getElementById('interest').value || null,
+        interests: document.getElementById('interests').value || null,
         favourite_subject: document.getElementById('favourite_subject').value || null,
         instagram: document.getElementById('instagram').value || null,
         favourite_quote: document.getElementById('favourite_quote').value || null,
