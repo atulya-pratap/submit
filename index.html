@@ -1,10 +1,34 @@
-<form id="profile-form">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Profile | JNV Varanasi Magazine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- This line is what makes it look beautiful! -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="submit-header">
+        <h1>JNV Varanasi</h1>
+        <p>Issue No. 1 • Profile Submission Portal</p>
+    </header>
+
+    <main class="form-container">
+        <form id="profile-form">
             
             <div class="form-group">
                 <label for="student-name">Select Your Name *</label>
                 <select id="student-name" required>
                     <option value="">-- Choose your name --</option>
-                    <!-- PASTE YOUR 66 NAMES HERE -->
+                    
+                    <!-- PASTE ALL 66 OF YOUR NAMES HERE -->
+                    <option value="Atulya Pratap">Atulya Pratap</option>
+                    <option value="Ajeet Kumar">Ajeet Kumar</option>
+                    <!-- etc... -->
+                    
                 </select>
                 <small>If your name isn't here, contact Atulya.</small>
             </div>
@@ -83,3 +107,9 @@
             <p id="status-message"></p>
 
         </form>
+    </main>
+
+    <!-- This line connects your submit button to Supabase! -->
+    <script src="script.js"></script>
+</body>
+</html>
