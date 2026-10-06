@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Profile | JNV Varanasi Magazine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="submit-header">
+        <h1>JNV Varanasi</h1>
+        <p>Issue No. 1 • Profile Submission Portal</p>
+    </header>
+
+    <main class="form-container">
+        <form id="profile-form">
+            
+            <div class="form-group">
+                <label for="student-name">Select Your Name *</label>
+                <select id="student-name" required>
+                    <option value="">-- Choose your name --</option>
+                    <option value="Ajeet Kumar">Ajeet Kumar</option>
+                    <option value="Alok Kumar">Alok Kumar</option>
+                    <option value="Anil Yadav">Anil Yadav</option>
+                    <option value="Ankush Rana">Ankush Rana</option>
+                    <option value="Ankush Sahani">Ankush Sahani</option>
+                    <option value="Arav Chaudhary">Arav Chaudhary</option>
+                    <option value="Aryan Kapoor">Aryan Kapoor</option>
+                    <option value="Ashish Gautam">Ashish Gautam</option>
+                    <option value="Atulya Pratap">Atulya Pratap</option>
+                    <option value="Bibhu Singh">Bibhu Singh</option>
+                    <option value="Deep Govind">Deep Govind</option>
+                    <option value="Dhruv Ji Upadhyay">Dhruv Ji Upadhyay</option>
+                    <option value="Divya Rani">Divya Rani</option>
+                    <option value="Farhan">Farhan</option>
+                    <option value="Harsh Jaiswal">Harsh Jaiswal</option>
+                    <option value="Harshit Tiwari">Harshit Tiwari</option>
+                    <option value="Himanshu Kumar">Himanshu Kumar</option>
+                    <option value="Kapil Gangwar">Kapil Gangwar</option>
+                    <option value="Krishna Parwal">Krishna Parwal</option>
+                    <option value="Kumari Gauri">Kumari Gauri</option>
+                    <option value="Lakshay Pratap Singh">Lakshay Pratap Singh</option>
+                    <option value="Pankaj Maurya">Pankaj Maurya</option>
+                    <option value="Piyush Vardhan">Piyush Vardhan</option>
+                    <option value="Pratyush">Pratyush</option>
+                    <option value="Priyanshu">Priyanshu</option>
+                    <option value="Riya Rai">Riya Rai</option>
+                    <option value="Saurabh Kumar">Saurabh Kumar</option>
+                    <option value="Shikha Pal">Shikha Pal</option>
+                    <option value="Shivam">Shivam</option>
+                    <option value="Shivam Kumar">Shivam Kumar</option>
+                    <option value="Shudansu Kumar">Shudansu Kumar</option>
+                    <option value="Sourabh Roshan">Sourabh Roshan</option>
+                    <option value="Sumit Kumar Singh">Sumit Kumar Singh</option>
+                    <option value="Suraj Pratap Singh">Suraj Pratap Singh</option>
+                    <option value="Sushant Kumar">Sushant Kumar</option>
+                    <option value="Tanish Kumar">Tanish Kumar</option>
+                    <option value="Tejash Shukla">Tejash Shukla</option>
+                    <option value="Tristi Kumari">Tristi Kumari</option>
+                    <option value="Tulsi Kumari">Tulsi Kumari</option>
+                    <option value="Vaivhav Raj">Vaivhav Raj</option>
+                    <option value="Ved Prakash">Ved Prakash</option>
+                    <option value="Vikas">Vikas</option>
+                    <option value="Vikram Singh Rana">Vikram Singh Rana</option>
+                    <option value="Vipin Kumar Varun">Vipin Kumar Varun</option>
+                    <option value="Abhijeet Yadav">Abhijeet Yadav</option>
+                    <option value="Aditya Patel">Aditya Patel</option>
+                    <option value="Aditya Singh Kushwaha">Aditya Singh Kushwaha</option>
+                    <option value="Akhilesh Kumar Verma">Akhilesh Kumar Verma</option>
+                    <option value="Amrita Tiwari">Amrita Tiwari</option>
+                    <option value="Anamika">Anamika</option>
+                    <option value="Arpit Yadav">Arpit Yadav</option>
+                    <option value="Jahnvi Singh">Jahnvi Singh</option>
+                    <option value="Jasveer Singh">Jasveer Singh</option>
+                    <option value="Khushi Kanojiya">Khushi Kanojiya</option>
+                    <option value="Khushi Patel">Khushi Patel</option>
+                    <option value="Lakshman Arya">Lakshman Arya</option>
+                    <option value="Manali">Manali</option>
+                    <option value="Pavan Kumar">Pavan Kumar</option>
+                    <option value="Samridhi Sharma">Samridhi Sharma</option>
+                    <option value="Saniya Bi">Saniya Bi</option>
+                    <option value="Shobhit Kumar">Shobhit Kumar</option>
+                    <option value="Shruti Agrahari">Shruti Agrahari</option>
+                    <option value="Swaroop Kumar">Swaroop Kumar</option>
+                    <option value="Tanaisha Singh">Tanaisha Singh</option>
+                    <option value="Vaibhav Verma">Vaibhav Verma</option>
+                    <option value="Vivek Kumar">Vivek Kumar</option>
+                </select>
+                <small>If your name isn't here, contact Atulya.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="bio">Short Bio</label>
+                <textarea id="bio" rows="3" placeholder="I've always been fascinated by..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="hobbies">Hobbies (Comma separated)</label>
+                <input type="text" id="hobbies" placeholder="Photography, Coding, Cricket">
+            </div>
+
+            <div class="form-group">
+                <label for="interest">Interests (Comma separated)</label>
+                <input type="text" id="interest" placeholder="Technology, Cinema, Space">
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="favourite_subject">Favourite Subject</label>
+                    <input type="text" id="favourite_subject" placeholder="Mathematics">
+                </div>
+                <div class="form-group">
+                    <label for="instagram">Instagram Handle</label>
+                    <input type="text" id="instagram" placeholder="username (no @)">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="favourite_quote">Signature Quote</label>
+                <input type="text" id="favourite_quote" placeholder="We are all in the gutter, but some of us...">
+            </div>
+
+            <div class="form-group">
+                <label for="photo_url">Profile Photo URL (Optional)</label>
+                <input type="url" id="photo_url" placeholder="Paste a public link to your photo (Drive, Instagram, Imgur)">
+            </div>
+
+            <button type="submit" id="submit-btn">Submit Profile</button>
+            <p id="status-message"></p>
+
+        </form>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
