@@ -17,23 +17,38 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         const studentName = document.getElementById('student-name')?.value;
         if (!studentName) throw new Error("Student name is missing");
 
-        // The ? safely checks if the element exists before trying to read its value.
-        // It will no longer crash your script if there is a typo!
-       const payload = {
-            roll_no: document.getElementById('roll_no')?.value || null,
-            house: document.getElementById('house')?.value || null,
-            bio: document.getElementById('bio')?.value || null,
-            hobbies: document.getElementById('hobbies')?.value || null,
-            interests: document.getElementById('interest')?.value || null,
-            favourite_subject: document.getElementById('favourite_subject')?.value || null,
-            favourite_book: document.getElementById('favourite_book')?.value || null,
-            favourite_movie: document.getElementById('favourite_movie')?.value || null,
-            achievements: document.getElementById('achievements')?.value || null,
-            instagram: document.getElementById('instagram')?.value || null,
-            favourite_quote: document.getElementById('favourite_quote')?.value || null,
-            photo_url: document.getElementById('photo_url')?.value || null
-        };
+        // 1. Start with a completely empty package
+        const payload = {};
 
+        // 2. Helper function: Only add to the package if they typed something
+        function addIfFilled(dbColumn, elementId) {
+            const element = document.getElementById(elementId);
+            if (element && element.value && element.value.trim() !== "") {
+                payload[dbColumn] = element.value.trim();
+            }
+        }
+
+        // 3. Check every form box one by one
+        // Left side is your Supabase column name, right side is your HTML id
+        addIfFilled('roll_no', 'roll_number'); // Maps HTML id="roll_number" to DB "roll_no"
+        addIfFilled('house', 'house');
+        addIfFilled('bio', 'bio');
+        addIfFilled('hobbies', 'hobbies');
+        addIfFilled('interests', 'interest'); // Maps HTML id="interest" to DB "interests"
+        addIfFilled('favourite_subject', 'favourite_subject');
+        addIfFilled('favourite_book', 'favourite_book');
+        addIfFilled('favourite_movie', 'favourite_movie');
+        addIfFilled('achievements', 'achievements');
+        addIfFilled('instagram', 'instagram');
+        addIfFilled('favourite_quote', 'favourite_quote');
+        addIfFilled('photo_url', 'photo_url');
+
+        // Safety check: Did they submit a completely blank form?
+        if (Object.keys(payload).length === 0) {
+            throw new Error("You didn't fill out any new fields to update!");
+        }
+
+        // 4. Send ONLY the filled data to Supabase
         const response = await fetch(
             `${SUPABASE_URL}/rest/v1/student?name=eq.${encodeURIComponent(studentName)}`,
             {
@@ -61,7 +76,7 @@ document.getElementById('profile-form').addEventListener('submit', async functio
     } catch (error) {
         console.error("Crash Details:", error);
         
-        // This will now print the EXACT error directly on your screen so it never hangs!
+        // This will now print the EXACT error directly on your screen so it never hangs
         statusMsg.textContent = `❌ Failed: ${error.message}`;
         statusMsg.className = "error";
         
