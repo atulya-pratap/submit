@@ -1,13 +1,32 @@
 const SUPABASE_URL = "https://pzplzdgdlnjfwbklxbfd.supabase.co";
 const SUPABASE_KEY = "sb_publishable_N3pli21Nl9PtLXeFkiuizg_W5Aw5MpM";
 
+// Modal Logic
+const modal = document.getElementById("info-modal");
+const infoBtn = document.getElementById("info-btn");
+const closeBtn = document.querySelector(".close-modal");
+
+infoBtn.addEventListener("click", () => {
+    modal.style.display = "block";
+});
+
+closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
+
+// Database Submit Logic
 document.getElementById('profile-form').addEventListener('submit', async function(e) {
     e.preventDefault(); 
 
     const btn = document.getElementById('submit-btn');
     const statusMsg = document.getElementById('status-message');
     
-    // Reset states
     btn.textContent = "Saving to Database...";
     btn.disabled = true;
     statusMsg.textContent = "";
@@ -17,10 +36,8 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         const studentName = document.getElementById('student-name')?.value;
         if (!studentName) throw new Error("Student name is missing");
 
-        // 1. Start with a completely empty package
         const payload = {};
 
-        // 2. Helper function: Only add to the package if they typed something
         function addIfFilled(dbColumn, elementId) {
             const element = document.getElementById(elementId);
             if (element && element.value && element.value.trim() !== "") {
@@ -28,7 +45,6 @@ document.getElementById('profile-form').addEventListener('submit', async functio
             }
         }
 
-        // 3. Check every form box one by one
         addIfFilled('roll_no', 'roll_number');
         addIfFilled('house', 'house');
         addIfFilled('bio', 'bio');
@@ -41,8 +57,6 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         addIfFilled('instagram', 'instagram');
         addIfFilled('favourite_quote', 'favourite_quote');
         addIfFilled('photo_url', 'photo_url');
-        
-        // --- NEW MEMORY FIELDS ---
         addIfFilled('favourite_song', 'favourite_song');
         addIfFilled('hidden_talent', 'hidden_talent');
         addIfFilled('navodaya_means', 'navodaya_means');
@@ -55,12 +69,10 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         addIfFilled('anything_else', 'anything_else');
         addIfFilled('anything_else_brief', 'anything_else_brief');
 
-        // Safety check: Did they submit a completely blank form?
         if (Object.keys(payload).length === 0) {
             throw new Error("You didn't fill out any new fields to update!");
         }
 
-        // 4. Send ONLY the filled data to Supabase
         const response = await fetch(
             `${SUPABASE_URL}/rest/v1/student?name=eq.${encodeURIComponent(studentName)}`,
             {
@@ -76,7 +88,6 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         );
 
         if (!response.ok) {
-            // If Supabase rejects it (like a missing column), it throws the exact error here
             const errorData = await response.text();
             throw new Error(errorData); 
         }
@@ -87,11 +98,8 @@ document.getElementById('profile-form').addEventListener('submit', async functio
 
     } catch (error) {
         console.error("Crash Details:", error);
-        
-        // This will now print the EXACT error directly on your screen so it never hangs
         statusMsg.textContent = `❌ Failed: ${error.message}`;
         statusMsg.className = "error";
-        
     } finally {
         btn.textContent = "Submit Profile to Database";
         btn.disabled = false;
