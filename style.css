@@ -28,6 +28,7 @@ body {
 .form-group { margin-bottom: 25px; }
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
+/* Fixed label to align the 'i' button correctly */
 label { display: flex; align-items: center; font-size: 0.9rem; margin-bottom: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;}
 small { color: #64748b; font-size: 0.8rem; }
 
@@ -38,16 +39,29 @@ input, select, textarea {
 }
 input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent-color); }
 
-/* Info Button styling */
-.info-btn {
-    background: var(--accent-color); color: #000; border: none; border-radius: 50%;
-    width: 20px; height: 20px; font-size: 12px; font-weight: bold; font-family: serif;
-    cursor: pointer; margin-left: 8px; display: inline-flex; align-items: center;
-    justify-content: center; padding: 0; transition: transform 0.2s;
+/* Bulletproof Info Button styling */
+button#info-btn {
+    background: var(--accent-color) !important; 
+    color: #000 !important; 
+    border: none !important; 
+    border-radius: 50% !important;
+    width: 22px !important; 
+    height: 22px !important; 
+    font-size: 14px !important; 
+    font-weight: bold !important; 
+    font-family: serif !important;
+    cursor: pointer !important; 
+    margin-left: 10px !important; 
+    margin-top: 0 !important;
+    padding: 0 !important; 
+    display: inline-flex !important; 
+    align-items: center !important;
+    justify-content: center !important; 
+    transition: transform 0.2s !important;
 }
-.info-btn:hover { transform: scale(1.1); }
+button#info-btn:hover { transform: scale(1.1) !important; }
 
-/* Modal styling */
+/* Bulletproof Modal styling */
 .modal {
     display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px);
@@ -90,12 +104,13 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--a
 }
 .upload-btn:hover { background: var(--accent-color); color: #000; }
 
-button[type="submit"] {
-    width: 100%; padding: 18px; background: var(--accent-color); color: #000;
+/* Main Submit Button - Now specifically targets only the submit button */
+button#submit-btn {
+    width: 100%; padding: 18px; background: var(--accent-color) !important; color: #000 !important;
     border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600;
     cursor: pointer; transition: transform 0.2s, opacity 0.2s; margin-top: 10px;
 }
-button[type="submit"]:hover { opacity: 0.9; transform: translateY(-2px); }
+button#submit-btn:hover { opacity: 0.9; transform: translateY(-2px); }
 
 #status-message { text-align: center; margin-top: 15px; font-weight: 500; }
 .success { color: #4ade80; }
