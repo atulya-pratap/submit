@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Profile | JNV Varanasi Magazine</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-    
-    <!-- This line is what makes it look beautiful! -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,7 +17,6 @@
     <main class="form-container">
         <form id="profile-form">
             
-            <!-- SECTION 1: MAIN PROFILE -->
             <div class="section-divider">
                 <h2>Main Profile</h2>
                 <p>The core details for your magazine card</p>
@@ -164,12 +161,13 @@
             </div>
 
             <div class="form-group">
-                <label for="photo_url">Profile Photo URL (Optional)</label>
-                <input type="url" id="photo_url" placeholder="Paste a public link to your photo (Drive, Instagram, Imgur)">
+                <label for="photo_url">
+                    Profile Photo URL 
+                    <button type="button" id="info-btn" class="info-btn">i</button>
+                </label>
+                <input type="url" id="photo_url" placeholder="Paste a public direct link to your photo">
             </div>
 
-
-            <!-- SECTION 2: JNV MEMORIES -->
             <div class="section-divider">
                 <h2>Navodaya Memories (Optional)</h2>
                 <p>Fill out as many as you'd like. This is the heart of the magazine!</p>
@@ -211,7 +209,6 @@
                 <input type="text" id="future_goal" placeholder="e.g. Software Engineer, Doctor, NDA...">
             </div>
 
-            <!-- Teacher Group -->
             <div class="form-grid">
                 <div class="form-group">
                     <label for="favourite_teacher">Favourite Teacher</label>
@@ -223,7 +220,6 @@
                 </div>
             </div>
 
-            <!-- Anything Else Group -->
             <div class="form-grid">
                 <div class="form-group">
                     <label for="anything_else">Anything Else (Heading)</label>
@@ -235,7 +231,6 @@
                 </div>
             </div>
 
-            <!-- SECTION 3: EXTERNAL UPLOADS -->
             <div class="section-divider">
                 <h2>File Uploads (Optional)</h2>
                 <p>Have physical files to share? Submit them via our Google Forms.</p>
@@ -260,7 +255,30 @@
         </form>
     </main>
 
-    <!-- This line connects your submit button to Supabase! -->
+    <!-- Info Modal -->
+    <div id="info-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>📸 How to create your Profile Photo link</h3>
+            <ol>
+                <li>Open ImgBB: <a href="https://imgbb.com/" target="_blank">https://imgbb.com/</a></li>
+                <li>Tap <strong>Start uploading</strong>.</li>
+                <li>Select your profile photo.</li>
+                <li>Upload it.</li>
+                <li>After uploading, find <strong>Direct link</strong>.</li>
+                <li>Copy that link and paste it in the form.</li>
+            </ol>
+            <div class="warning-box">
+                <strong>⚠️ Important:</strong> Send the <em>Direct link</em> of the image, not the normal webpage link.
+            </div>
+            <div class="example-box">
+                <strong>Example:</strong><br>
+                https://i.ibb.co/xxxxx/photo.jpg<br>
+                <br>That's it :)
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
