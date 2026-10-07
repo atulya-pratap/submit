@@ -29,12 +29,11 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         }
 
         // 3. Check every form box one by one
-        // Left side is your Supabase column name, right side is your HTML id
-        addIfFilled('roll_no', 'roll_number'); // Maps HTML id="roll_number" to DB "roll_no"
+        addIfFilled('roll_no', 'roll_number');
         addIfFilled('house', 'house');
         addIfFilled('bio', 'bio');
         addIfFilled('hobbies', 'hobbies');
-        addIfFilled('interests', 'interest'); // Maps HTML id="interest" to DB "interests"
+        addIfFilled('interests', 'interest');
         addIfFilled('favourite_subject', 'favourite_subject');
         addIfFilled('favourite_book', 'favourite_book');
         addIfFilled('favourite_movie', 'favourite_movie');
@@ -42,6 +41,19 @@ document.getElementById('profile-form').addEventListener('submit', async functio
         addIfFilled('instagram', 'instagram');
         addIfFilled('favourite_quote', 'favourite_quote');
         addIfFilled('photo_url', 'photo_url');
+        
+        // --- NEW MEMORY FIELDS ---
+        addIfFilled('favourite_song', 'favourite_song');
+        addIfFilled('hidden_talent', 'hidden_talent');
+        addIfFilled('navodaya_means', 'navodaya_means');
+        addIfFilled('favourite_jnv_memory', 'favourite_jnv_memory');
+        addIfFilled('what_i_will_miss', 'what_i_will_miss');
+        addIfFilled('how_jnv_changed_me', 'how_jnv_changed_me');
+        addIfFilled('future_goal', 'future_goal');
+        addIfFilled('favourite_teacher', 'favourite_teacher');
+        addIfFilled('favourite_teacher_reason', 'favourite_teacher_reason');
+        addIfFilled('anything_else', 'anything_else');
+        addIfFilled('anything_else_brief', 'anything_else_brief');
 
         // Safety check: Did they submit a completely blank form?
         if (Object.keys(payload).length === 0) {
