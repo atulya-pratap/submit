@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Profile | JNV Varanasi Magazine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --accent-color: #c2a67f;
+            --input-bg: #1e293b;
+            --success-bg: rgba(74, 222, 128, 0.1);
+            --success-border: #4ade80;
+            --warning-bg: rgba(248, 113, 113, 0.1);
+            --warning-border: #f87171;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        .header { text-align: center; padding: 50px 20px 30px; border-bottom: 1px solid #334155; }
+        .header h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--accent-color); font-style: italic; }
+        .header p { color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; margin-top: 10px; }
+
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+
+        .search-box {
+            background: var(--input-bg); padding: 30px; border-radius: 12px;
+            border: 1px solid var(--accent-color); text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .search-box label { display: block; margin-bottom: 15px; color: var(--accent-color); font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
+        
+        select {
+            width: 100%; max-width: 400px; padding: 15px; background: var(--bg-color);
+            border: 1px solid #475569; border-radius: 8px; color: white;
+            font-family: 'Inter', sans-serif; font-size: 1rem; margin-bottom: 20px; outline: none;
+        }
+        select:focus { border-color: var(--accent-color); }
+
+        button {
+            padding: 15px 30px; background: var(--accent-color); color: #000;
+            border: none; border-radius: 8px; font-size: 1rem; font-weight: 600;
+            cursor: pointer; transition: 0.2s;
+        }
+        button:hover { opacity: 0.9; transform: translateY(-2px); }
+        button:disabled { background: #475569; cursor: not-allowed; transform: none; }
+
+        #loading { display: none; text-align: center; color: var(--accent-color); margin-top: 20px; font-weight: 500; }
+        #error-msg { display: none; text-align: center; color: #f87171; margin-top: 20px; background: var(--warning-bg); padding: 10px; border-radius: 8px; }
+
+        /* Dashboard specific styles */
+        #dashboard { display: none; margin-top: 40px; }
+        
+        .profile-header { text-align: center; margin-bottom: 40px; }
+        .profile-header h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #fff; }
+        .profile-badge { display: inline-block; background: var(--accent-color); color: #000; padding: 5px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-top: 10px; }
+
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        
+        @media (max-width: 768px) { .dashboard-grid { grid-template-columns: 1fr; } }
+
+        .section-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #334155; }
+        
+        .filled-section .section-title { color: var(--success-border); border-bottom-color: var(--success-border); }
+        .empty-section .section-title { color: var(--warning-border); border-bottom-color: var(--warning-border); }
+
+        .data-card {
+            background: var(--input-bg); padding: 15px 20px; border-radius: 8px; margin-bottom: 15px;
+            border-left: 4px solid #334155;
+        }
+        .data-card.filled { border-left-color: var(--success-border); background: var(--success-bg); }
+        .data-card.empty { border-left-color: var(--warning-border); background: var(--warning-bg); }
+
+        .data-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 5px; }
+        .filled .data-label { color: #4ade80; }
+        .empty .data-label { color: #f87171; }
+        
+        .data-value { font-size: 1rem; color: #fff; word-wrap: break-word; }
+        .data-value.missing { color: #fca5a5; font-style: italic; font-size: 0.9rem; }
+
+        .back-link { display: block; text-align: center; margin-top: 40px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; }
+        .back-link:hover { color: var(--accent-color); text-decoration: underline; }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Profile Verification</h1>
+        <p>JNV Varanasi Magazine Dashboard</p>
+    </header>
+
+    <main class="container">
+        
+        <!-- Search Box -->
+        <div class="search-box">
+            <label for="search-name">Select your name to check your status</label>
+            <select id="search-name">
+                <option value="">-- Choose your name --</option>
+                <!-- Pre-populated with your exact student list -->
+                <option value="Ajeet Kumar">Ajeet Kumar</option><option value="Alok Kumar">Alok Kumar</option><option value="Anil Yadav">Anil Yadav</option><option value="Ankush Rana">Ankush Rana</option><option value="Ankush Sahani">Ankush Sahani</option><option value="Arav Chaudhary">Arav Chaudhary</option><option value="Aryan Kapoor">Aryan Kapoor</option><option value="Ashish Gautam">Ashish Gautam</option><option value="Atulya Pratap">Atulya Pratap</option><option value="Bibhu Singh">Bibhu Singh</option><option value="Deep Govind">Deep Govind</option><option value="Dhruv Ji Upadhyay">Dhruv Ji Upadhyay</option><option value="Divya Rani">Divya Rani</option><option value="Farhan">Farhan</option><option value="Harsh Jaiswal">Harsh Jaiswal</option><option value="Harshit Tiwari">Harshit Tiwari</option><option value="Himanshu Kumar">Himanshu Kumar</option><option value="Kapil Gangwar">Kapil Gangwar</option><option value="Krishna Parwal">Krishna Parwal</option><option value="Kumari Gauri">Kumari Gauri</option><option value="Lakshay Pratap Singh">Lakshay Pratap Singh</option><option value="Pankaj Maurya">Pankaj Maurya</option><option value="Piyush Vardhan">Piyush Vardhan</option><option value="Pratyush">Pratyush</option><option value="Priyanshu">Priyanshu</option><option value="Riya Rai">Riya Rai</option><option value="Saurabh Kumar">Saurabh Kumar</option><option value="Shikha Pal">Shikha Pal</option><option value="Shivam">Shivam</option><option value="Shivam Kumar">Shivam Kumar</option><option value="Shudansu Kumar">Shudansu Kumar</option><option value="Sourabh Roshan">Sourabh Roshan</option><option value="Sumit Kumar Singh">Sumit Kumar Singh</option><option value="Suraj Pratap Singh">Suraj Pratap Singh</option><option value="Sushant Kumar">Sushant Kumar</option><option value="Tanish Kumar">Tanish Kumar</option><option value="Tejash Shukla">Tejash Shukla</option><option value="Tristi Kumari">Tristi Kumari</option><option value="Tulsi Kumari">Tulsi Kumari</option><option value="Vaivhav Raj">Vaivhav Raj</option><option value="Ved Prakash">Ved Prakash</option><option value="Vikas">Vikas</option><option value="Vikram Singh Rana">Vikram Singh Rana</option><option value="Vipin Kumar Varun">Vipin Kumar Varun</option><option value="Abhijeet Yadav">Abhijeet Yadav</option><option value="Aditya Patel">Aditya Patel</option><option value="Aditya Singh Kushwaha">Aditya Singh Kushwaha</option><option value="Akhilesh Kumar Verma">Akhilesh Kumar Verma</option><option value="Amrita Tiwari">Amrita Tiwari</option><option value="Anamika">Anamika</option><option value="Arpit Yadav">Arpit Yadav</option><option value="Jahnvi Singh">Jahnvi Singh</option><option value="Jasveer Singh">Jasveer Singh</option><option value="Khushi Kanojiya">Khushi Kanojiya</option><option value="Khushi Patel">Khushi Patel</option><option value="Lakshman Arya">Lakshman Arya</option><option value="Manali">Manali</option><option value="Pavan Kumar">Pavan Kumar</option><option value="Samridhi Sharma">Samridhi Sharma</option><option value="Saniya Bi">Saniya Bi</option><option value="Shobhit Kumar">Shobhit Kumar</option><option value="Shruti Agrahari">Shruti Agrahari</option><option value="Swaroop Kumar">Swaroop Kumar</option><option value="Tanaisha Singh">Tanaisha Singh</option><option value="Vaibhav Verma">Vaibhav Verma</option><option value="Vivek Kumar">Vivek Kumar</option>
+            </select>
+            <br>
+            <button id="check-btn">Check Profile Status</button>
+            <div id="loading">Fetching data from magazine database...</div>
+            <div id="error-msg"></div>
+        </div>
+
+        <!-- Dashboard UI (Hidden until search) -->
+        <div id="dashboard">
+            <div class="profile-header">
+                <h2 id="display-name">Student Name</h2>
+                <div class="profile-badge" id="display-house">House pending...</div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Column 1: Filled Data -->
+                <div class="filled-section">
+                    <h3 class="section-title">✅ Completed Details</h3>
+                    <div id="filled-container">
+                        <!-- Filled cards will generate here -->
+                    </div>
+                </div>
+
+                <!-- Column 2: Empty Data -->
+                <div class="empty-section">
+                    <h3 class="section-title">⚠️ Pending / Empty</h3>
+                    <div id="empty-container">
+                        <!-- Empty cards will generate here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="../" class="back-link">← Back to Submission Form</a>
+
+    </main>
+
+    <script>
+        const SUPABASE_URL = "https://pzplzdgdlnjfwbklxbfd.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_N3pli21Nl9PtLXeFkiuizg_W5Aw5MpM";
+
+        // Map database columns to beautiful UI labels
+        const fieldsToTrack = [
+            { key: 'roll_no', label: 'Roll Number' },
+            { key: 'house', label: 'House' },
+            { key: 'bio', label: 'Short Bio' },
+            { key: 'hobbies', label: 'Hobbies' },
+            { key: 'interests', label: 'Interests' },
+            { key: 'favourite_subject', label: 'Favourite Subject' },
+            { key: 'favourite_book', label: 'Favourite Book' },
+            { key: 'favourite_movie', label: 'Favourite Movie' },
+            { key: 'achievements', label: 'Achievements & Work' },
+            { key: 'instagram', label: 'Instagram Handle' },
+            { key: 'favourite_quote', label: 'Signature Quote' },
+            { key: 'photo_url', label: 'Profile Photo Link' },
+            { key: 'favourite_song', label: 'Comfort Song' },
+            { key: 'hidden_talent', label: 'Hidden Talent' },
+            { key: 'navodaya_means', label: 'Navodaya Means To Me' },
+            { key: 'favourite_jnv_memory', label: 'Favourite Memory' },
+            { key: 'what_i_will_miss', label: 'What I Will Miss' },
+            { key: 'how_jnv_changed_me', label: 'How JNV Changed Me' },
+            { key: 'future_goal', label: 'Future Goal' },
+            { key: 'favourite_teacher', label: 'Favourite Teacher' },
+            { key: 'favourite_teacher_reason', label: 'Why Favourite Teacher' },
+            { key: 'anything_else', label: 'Anything Else (Heading)' },
+            { key: 'anything_else_brief', label: 'Anything Else (Explanation)' }
+        ];
+
+        document.getElementById('check-btn').addEventListener('click', async () => {
+            const name = document.getElementById('search-name').value;
+            const errorMsg = document.getElementById('error-msg');
+            const loading = document.getElementById('loading');
+            const dashboard = document.getElementById('dashboard');
+            const btn = document.getElementById('check-btn');
+            
+            if (!name) {
+                alert("Please select a name first.");
+                return;
+            }
+
+            // Reset UI
+            errorMsg.style.display = 'none';
+            dashboard.style.display = 'none';
+            loading.style.display = 'block';
+            btn.disabled = true;
+
+            try {
+                // Fetch the student's row from Supabase
+                const response = await fetch(
+                    `${SUPABASE_URL}/rest/v1/student?select=*&name=eq.${encodeURIComponent(name)}`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`
+                        }
+                    }
+                );
+
+                if (!response.ok) throw new Error("Failed to connect to database.");
+                
+                const data = await response.json();
+
+                if (data.length === 0) {
+                    throw new Error("Profile not found. You need to submit the main form first!");
+                }
+
+                const profile = data[0]; // Get the exact student row
+
+                // Set Header
+                document.getElementById('display-name').textContent = profile.name || name;
+                document.getElementById('display-house').textContent = profile.house ? `House: ${profile.house}` : "House: Not Selected";
+
+                const filledContainer = document.getElementById('filled-container');
+                const emptyContainer = document.getElementById('empty-container');
+                
+                filledContainer.innerHTML = '';
+                emptyContainer.innerHTML = '';
+
+                let filledCount = 0;
+                let emptyCount = 0;
+
+                // Sort fields into Completed and Pending
+                fieldsToTrack.forEach(field => {
+                    const value = profile[field.key];
+                    
+                    if (value && value.toString().trim() !== "") {
+                        // Field is filled
+                        filledCount++;
+                        filledContainer.innerHTML += `
+                            <div class="data-card filled">
+                                <div class="data-label">${field.label}</div>
+                                <div class="data-value">${value}</div>
+                            </div>
+                        `;
+                    } else {
+                        // Field is missing
+                        emptyCount++;
+                        emptyContainer.innerHTML += `
+                            <div class="data-card empty">
+                                <div class="data-label">${field.label}</div>
+                                <div class="data-value missing">Yet to be filled...</div>
+                            </div>
+                        `;
+                    }
+                });
+
+                // Show messages if completely full or completely empty
+                if (filledCount === 0) filledContainer.innerHTML = '<p style="color: var(--text-muted); font-style: italic;">Nothing submitted yet.</p>';
+                if (emptyCount === 0) emptyContainer.innerHTML = '<p style="color: #4ade80; font-weight: bold;">🎉 Amazing! All fields are completed.</p>';
+
+                // Reveal Dashboard
+                dashboard.style.display = 'block';
+
+            } catch (err) {
+                errorMsg.textContent = err.message;
+                errorMsg.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
