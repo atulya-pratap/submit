@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recent Activity | JNV Varanasi Magazine</title>
+    <title>Activity & History Log | JNV Varanasi Magazine</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,7 +14,7 @@
             --text-muted: #94a3b8;
             --accent-color: #c2a67f;
             --border-color: #334155;
-            --success: #4ade80;
+            --history-accent: #38bdf8;
         }
 
         * {
@@ -28,7 +28,7 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
-            padding-bottom: 60px;
+            padding-bottom: 80px;
         }
 
         .header {
@@ -52,7 +52,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 35px auto;
             padding: 0 20px;
         }
@@ -60,7 +60,7 @@
         /* Stats Bar */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             margin-bottom: 30px;
         }
@@ -69,19 +69,19 @@
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 10px;
-            padding: 18px;
+            padding: 16px;
             text-align: center;
         }
 
         .stat-number {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 1.9rem;
             color: var(--accent-color);
             font-weight: 700;
         }
 
         .stat-label {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-muted);
@@ -95,13 +95,21 @@
             gap: 12px;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            position: sticky;
+            top: 10px;
+            z-index: 10;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
         }
 
         .search-input {
             flex: 1;
             min-width: 200px;
-            padding: 12px 15px;
+            padding: 11px 15px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -116,11 +124,12 @@
 
         .btn-group {
             display: flex;
+            flex-wrap: wrap;
             gap: 8px;
         }
 
         .btn {
-            padding: 11px 16px;
+            padding: 10px 15px;
             background: var(--card-bg);
             color: var(--text-muted);
             border: 1px solid var(--border-color);
@@ -129,6 +138,7 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
+            text-decoration: none;
         }
 
         .btn.active, .btn:hover {
@@ -138,11 +148,47 @@
             font-weight: 600;
         }
 
-        /* Activity Feed */
+        /* Section Dividers */
+        .section-divider {
+            margin: 45px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--accent-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .section-divider h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .section-divider p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 4px;
+        }
+
+        .order-pill {
+            font-size: 0.75rem;
+            background: rgba(194, 166, 127, 0.15);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(194, 166, 127, 0.4);
+        }
+
+        /* Activity Feed Cards */
         .activity-list {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
 
         .activity-card {
@@ -150,9 +196,13 @@
             border: 1px solid var(--border-color);
             border-left: 4px solid var(--accent-color);
             border-radius: 10px;
-            padding: 20px;
+            padding: 18px 20px;
             cursor: pointer;
-            transition: background 0.2s, transform 0.15s;
+            transition: background 0.2s;
+        }
+
+        .activity-card.history-card {
+            border-left-color: var(--history-accent);
         }
 
         .activity-card:hover {
@@ -163,7 +213,8 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 12px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .activity-title {
@@ -175,14 +226,44 @@
             font-weight: 600;
         }
 
-        .time-badge {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+        .history-card .activity-title strong {
+            color: var(--history-accent);
+        }
+
+        .rank-badge {
+            display: inline-block;
+            background: #0f172a;
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-right: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Date & Time Box */
+        .datetime-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .dt-pill {
+            font-size: 0.78rem;
+            color: #e2e8f0;
             background: #0f172a;
             padding: 4px 10px;
-            border-radius: 20px;
-            white-space: nowrap;
+            border-radius: 6px;
             border: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        .dt-relative {
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            font-weight: 600;
         }
 
         .meta-tags {
@@ -194,20 +275,25 @@
 
         .tag {
             font-size: 0.75rem;
-            padding: 3px 9px;
+            padding: 3px 10px;
             border-radius: 6px;
-            background: rgba(194, 166, 127, 0.15);
+            background: rgba(194, 166, 127, 0.14);
             color: var(--accent-color);
+        }
+
+        .tag.blue {
+            background: rgba(56, 189, 248, 0.14);
+            color: var(--history-accent);
         }
 
         /* Expandable Details */
         .details-panel {
             display: none;
-            margin-top: 18px;
-            padding-top: 18px;
+            margin-top: 16px;
+            padding-top: 16px;
             border-top: 1px solid var(--border-color);
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
+            gap: 12px;
         }
 
         .activity-card.expanded .details-panel {
@@ -226,7 +312,7 @@
         }
 
         .detail-label {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--accent-color);
@@ -234,26 +320,29 @@
         }
 
         .detail-value {
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             color: #e2e8f0;
             word-break: break-word;
         }
 
-        .pending-badge {
+        .status-box {
+            text-align: center;
+            padding: 35px 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        .pending-card {
             border-left-color: #64748b;
             cursor: default;
         }
 
-        .status-box {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-muted);
-        }
-
-        @media (max-width: 600px) {
-            .stats-grid { grid-template-columns: 1fr; }
+        @media (max-width: 650px) {
+            .stats-grid { grid-template-columns: 1fr 1fr; }
             .details-panel { grid-template-columns: 1fr; }
-            .activity-top { flex-direction: column; gap: 6px; }
+            .activity-top { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
@@ -261,7 +350,7 @@
 
     <header class="header">
         <h1>JNV Varanasi</h1>
-        <p>Live Submission Activity Feed</p>
+        <p>Live Submission Activity & Full History Log</p>
     </header>
 
     <main class="container">
@@ -269,11 +358,15 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-number" id="submitted-count">0</div>
-                <div class="stat-label">Profiles Updated</div>
+                <div class="stat-label">Students Updated</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="history-count">0</div>
+                <div class="stat-label">Total History Logs</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="pending-count">0</div>
-                <div class="stat-label">Pending</div>
+                <div class="stat-label">Pending Students</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="total-count">0</div>
@@ -281,19 +374,50 @@
             </div>
         </div>
 
-        <!-- Filter & Search Controls -->
+        <!-- Sticky Search & Quick Jump Bar -->
         <div class="controls">
-            <input type="text" id="search-box" class="search-input" placeholder="Search student name or house...">
+            <input type="text" id="search-box" class="search-input" placeholder="Search by student name or house...">
             <div class="btn-group">
-                <button class="btn active" id="tab-recent" onclick="setFilter('submitted')">Recent Updates</button>
-                <button class="btn" id="tab-pending" onclick="setFilter('pending')">Pending</button>
-                <button class="btn" onclick="loadActivity()">↻ Refresh</button>
+                <a href="#section-recent" class="btn">1. Recent Profiles</a>
+                <a href="#section-history" class="btn">2. Full History Log</a>
+                <a href="#section-pending" class="btn">3. Pending</a>
+                <button class="btn active" onclick="loadAllData()">↻ Refresh Now</button>
             </div>
         </div>
 
-        <!-- Feed Container -->
-        <div id="feed-container" class="activity-list">
-            <div class="status-box">Loading recent activity from database...</div>
+        <!-- SECTION 1: RECENT PROFILE UPDATES (DESCENDING) -->
+        <div id="section-recent" class="section-divider">
+            <div>
+                <h2>1. Recent Profile Updates</h2>
+                <p>Most recently updated student profiles appear at the top</p>
+            </div>
+            <span class="order-pill">↓ Descending Order (Newest First)</span>
+        </div>
+        <div id="recent-container" class="activity-list">
+            <div class="status-box">Loading recent profile updates...</div>
+        </div>
+
+        <!-- SECTION 2: FULL SUBMISSION HISTORY LOG (MULTIPLE UPDATES) -->
+        <div id="section-history" class="section-divider">
+            <div>
+                <h2>2. Full Submission History Log</h2>
+                <p>Every update made by students (including multiple updates by the same student)</p>
+            </div>
+            <span class="order-pill">↓ Descending Order (Newest First)</span>
+        </div>
+        <div id="history-container" class="activity-list">
+            <div class="status-box">Loading full submission history log...</div>
+        </div>
+
+        <!-- SECTION 3: PENDING STUDENTS -->
+        <div id="section-pending" class="section-divider">
+            <div>
+                <h2>3. Pending Students</h2>
+                <p>Students who have not submitted their profile yet</p>
+            </div>
+        </div>
+        <div id="pending-container" class="activity-list">
+            <div class="status-box">Loading pending list...</div>
         </div>
     </main>
 
@@ -323,14 +447,17 @@
             { key: 'future_goal', label: 'Future Goal' },
             { key: 'favourite_teacher', label: 'Favourite Teacher' },
             { key: 'favourite_teacher_reason', label: 'Reason' },
-            { key: 'anything_else', label: 'Anything Else (Topic)' },
+            { key: 'anything_else', label: 'Anything Else (Heading)' },
             { key: 'anything_else_brief', label: 'Anything Else (Details)', full: true }
         ];
 
-        let allStudents = [];
-        let currentFilter = 'submitted';
+        const FIELD_LABELS = {};
+        PROFILE_FIELDS.forEach(f => FIELD_LABELS[f.key] = f.label);
 
-        // Check how many fields a student has filled out
+        let allStudents = [];
+        let historyLogs = [];
+        let historyTableExists = true;
+
         function getFilledFields(student) {
             return PROFILE_FIELDS.filter(f => {
                 const val = student[f.key];
@@ -338,96 +465,157 @@
             });
         }
 
-        // Convert timestamp into "5 mins ago" + readable date
-        function formatTimeAgo(dateString) {
-            if (!dateString) return "Recently updated";
+        // Format exact Date, exact Time (with seconds), and relative time
+        function formatDateTimeBadge(dateString) {
+            if (!dateString) {
+                return `
+                    <div class="datetime-box">
+                        <span class="dt-pill">📅 Updated prior to time-tracking</span>
+                    </div>
+                `;
+            }
+
             const date = new Date(dateString);
+            if (isNaN(date.getTime())) {
+                return `<div class="datetime-box"><span class="dt-pill">📅 Timestamp unavailable</span></div>`;
+            }
+
             const now = new Date();
-            const seconds = Math.floor((now - date) / 1000);
+            const seconds = Math.max(0, Math.floor((now - date) / 1000));
 
             let relative = "";
-            if (seconds < 60) relative = "Just now";
+            if (seconds < 60) relative = `${seconds}s ago`;
             else if (seconds < 3600) relative = `${Math.floor(seconds / 60)}m ago`;
             else if (seconds < 86400) relative = `${Math.floor(seconds / 3600)}h ago`;
             else relative = `${Math.floor(seconds / 86400)}d ago`;
 
-            const exact = date.toLocaleDateString('en-IN', {
-                day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'
+            const formattedDate = date.toLocaleDateString('en-IN', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
             });
 
-            return `${relative} • ${exact}`;
+            const formattedTime = date.toLocaleTimeString('en-IN', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+
+            return `
+                <div class="datetime-box">
+                    <span class="dt-relative">${relative}</span>
+                    <span class="dt-pill">📅 ${formattedDate}</span>
+                    <span class="dt-pill">🕒 ${formattedTime}</span>
+                </div>
+            `;
         }
 
-        async function loadActivity() {
-            const container = document.getElementById('feed-container');
-            container.innerHTML = `<div class="status-box">Fetching latest submissions...</div>`;
+        async function loadAllData() {
+            document.getElementById('recent-container').innerHTML = `<div class="status-box">Fetching latest submissions...</div>`;
+            document.getElementById('history-container').innerHTML = `<div class="status-box">Fetching full history log...</div>`;
 
             try {
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/student?select=*`, {
+                // 1. Fetch students
+                const studentRes = await fetch(`${SUPABASE_URL}/rest/v1/student?select=*`, {
                     headers: {
                         'apikey': SUPABASE_KEY,
                         'Authorization': `Bearer ${SUPABASE_KEY}`
                     }
                 });
 
-                if (!response.ok) {
-                    throw new Error(await response.text());
+                if (!studentRes.ok) throw new Error(await studentRes.text());
+                const rawStudents = await studentRes.json();
+
+                // Reverse raw PostgreSQL heap order so newest updates are first even if updated_at is null
+                allStudents = rawStudents.reverse();
+
+                // 2. Fetch full history logs ordered newest first
+                const historyRes = await fetch(`${SUPABASE_URL}/rest/v1/activity_logs?select=*&order=updated_at.desc`, {
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+
+                if (historyRes.ok) {
+                    historyLogs = await historyRes.json();
+                    historyTableExists = true;
+                } else {
+                    historyLogs = [];
+                    historyTableExists = false;
                 }
 
-                allStudents = await response.json();
-                renderFeed();
+                renderAllSections();
 
             } catch (error) {
-                console.error("Error loading activity:", error);
-                container.innerHTML = `<div class="status-box" style="color:#f87171;">❌ Failed to load activity: ${error.message}</div>`;
+                console.error("Error loading data:", error);
+                document.getElementById('recent-container').innerHTML =
+                    `<div class="status-box" style="color:#f87171;">❌ Error loading data: ${error.message}</div>`;
             }
         }
 
-        function renderFeed() {
-            const container = document.getElementById('feed-container');
-            const searchQuery = document.getElementById('search-box').value.toLowerCase().trim();
+        function renderAllSections() {
+            const query = document.getElementById('search-box').value.toLowerCase().trim();
 
-            // Separate submitted vs pending students
+            // Count how many times each student appears in historyLogs
+            const updateCounts = {};
+            const latestLogTimeByStudent = {};
+            historyLogs.forEach(log => {
+                const name = log.student_name;
+                updateCounts[name] = (updateCounts[name] || 0) + 1;
+                if (!latestLogTimeByStudent[name]) {
+                    latestLogTimeByStudent[name] = log.updated_at;
+                }
+            });
+
             const submitted = [];
             const pending = [];
 
-            allStudents.forEach(student => {
+            allStudents.forEach((student, index) => {
                 const filled = getFilledFields(student);
-                if (filled.length > 0 || student.updated_at) {
-                    submitted.push({ ...student, filledFields: filled });
+                const effectiveTimestamp = student.updated_at || latestLogTimeByStudent[student.name] || null;
+
+                if (filled.length > 0 || effectiveTimestamp) {
+                    submitted.push({
+                        ...student,
+                        filledFields: filled,
+                        effectiveTimestamp,
+                        reverseHeapOrder: index // Preserves reversed PostgreSQL update order as tie-breaker
+                    });
                 } else {
                     pending.push(student);
                 }
             });
 
-            // Sort submitted in DESCENDING order (newest first)
+            // Sort submitted strictly in DESCENDING order (most recent at the top)
             submitted.sort((a, b) => {
-                const timeA = a.updated_at ? new Date(a.updated_at).getTime() : (a.created_at ? new Date(a.created_at).getTime() : 0);
-                const timeB = b.updated_at ? new Date(b.updated_at).getTime() : (b.created_at ? new Date(b.created_at).getTime() : 0);
-                return timeB - timeA;
+                const timeA = a.effectiveTimestamp ? new Date(a.effectiveTimestamp).getTime() : 0;
+                const timeB = b.effectiveTimestamp ? new Date(b.effectiveTimestamp).getTime() : 0;
+                if (timeB !== timeA) {
+                    return timeB - timeA; // Newest timestamp first
+                }
+                return a.reverseHeapOrder - b.reverseHeapOrder; // Newest heap update first
             });
 
-            // Update stats counters
+            // Update Top Stats
             document.getElementById('submitted-count').textContent = submitted.length;
+            document.getElementById('history-count').textContent = historyLogs.length || submitted.length;
             document.getElementById('pending-count').textContent = pending.length;
             document.getElementById('total-count').textContent = allStudents.length;
 
-            const listToShow = currentFilter === 'submitted' ? submitted : pending;
+            // --- RENDER SECTION 1: RECENT PROFILE UPDATES ---
+            const filteredSubmitted = submitted.filter(s =>
+                (s.name || "").toLowerCase().includes(query) ||
+                (s.house || "").toLowerCase().includes(query)
+            );
 
-            const filtered = listToShow.filter(s => {
-                const nameMatch = (s.name || "").toLowerCase().includes(searchQuery);
-                const houseMatch = (s.house || "").toLowerCase().includes(searchQuery);
-                return nameMatch || houseMatch;
-            });
-
-            if (filtered.length === 0) {
-                container.innerHTML = `<div class="status-box">No records found.</div>`;
-                return;
-            }
-
-            if (currentFilter === 'submitted') {
-                container.innerHTML = filtered.map(student => {
-                    const timestamp = student.updated_at || student.created_at;
+            const recentContainer = document.getElementById('recent-container');
+            if (filteredSubmitted.length === 0) {
+                recentContainer.innerHTML = `<div class="status-box">No matching updated profiles found.</div>`;
+            } else {
+                recentContainer.innerHTML = filteredSubmitted.map((student, idx) => {
+                    const count = updateCounts[student.name] || 1;
                     const detailsHtml = student.filledFields.map(f => `
                         <div class="detail-item ${f.full ? 'full-width' : ''}">
                             <div class="detail-label">${f.label}</div>
@@ -439,13 +627,15 @@
                         <div class="activity-card" onclick="this.classList.toggle('expanded')">
                             <div class="activity-top">
                                 <div class="activity-title">
+                                    <span class="rank-badge">#${idx + 1} Latest</span>
                                     ✨ <strong>${escapeHtml(student.name)}</strong> updated their profile
                                 </div>
-                                <span class="time-badge">${formatTimeAgo(timestamp)}</span>
+                                ${formatDateTimeBadge(student.effectiveTimestamp)}
                             </div>
                             <div class="meta-tags">
                                 ${student.house ? `<span class="tag">🏠 ${escapeHtml(student.house)}</span>` : ''}
                                 ${student.roll_no ? `<span class="tag">#️⃣ Roll No: ${escapeHtml(String(student.roll_no))}</span>` : ''}
+                                <span class="tag">🔄 ${count} ${count > 1 ? 'Updates Recorded' : 'Update'}</span>
                                 <span class="tag">📝 ${student.filledFields.length} fields filled • Click to view</span>
                             </div>
                             <div class="details-panel">
@@ -454,25 +644,90 @@
                         </div>
                     `;
                 }).join('');
+            }
+
+            // --- RENDER SECTION 2: FULL SUBMISSION HISTORY LOG ---
+            const historyContainer = document.getElementById('history-container');
+
+            if (!historyTableExists) {
+                historyContainer.innerHTML = `
+                    <div class="status-box" style="border-color:#f59e0b; color:#fde68a;">
+                        ⚠️ <strong>History Log Table Not Enabled Yet:</strong><br>
+                        Please run the <strong>Step 1 SQL Script</strong> in your Supabase SQL Editor so Supabase records exact dates, times, and multiple updates per student.
+                    </div>
+                `;
             } else {
-                container.innerHTML = filtered.map(student => `
-                    <div class="activity-card pending-badge">
+                // Sort history logs strictly newest first
+                const sortedHistory = [...historyLogs].sort((a, b) =>
+                    new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+                );
+
+                const filteredHistory = sortedHistory.filter(log =>
+                    (log.student_name || "").toLowerCase().includes(query) ||
+                    (log.house || "").toLowerCase().includes(query)
+                );
+
+                if (filteredHistory.length === 0) {
+                    historyContainer.innerHTML = `<div class="status-box">No history log entries recorded yet. Every new profile submission will appear here with exact date & time.</div>`;
+                } else {
+                    historyContainer.innerHTML = filteredHistory.map((log, idx) => {
+                        const changedObj = log.changed_fields || {};
+                        const changedKeys = Object.keys(changedObj);
+
+                        const changesHtml = changedKeys.length > 0
+                            ? changedKeys.map(k => `
+                                <div class="detail-item">
+                                    <div class="detail-label">${escapeHtml(FIELD_LABELS[k] || k)} (Updated in this submission)</div>
+                                    <div class="detail-value">${escapeHtml(String(changedObj[k]))}</div>
+                                </div>
+                            `).join('')
+                            : `<div class="detail-item full-width"><div class="detail-value">Profile re-submitted without field changes.</div></div>`;
+
+                        return `
+                            <div class="activity-card history-card" onclick="this.classList.toggle('expanded')">
+                                <div class="activity-top">
+                                    <div class="activity-title">
+                                        <span class="rank-badge">Log #${filteredHistory.length - idx}</span>
+                                        🕒 <strong>${escapeHtml(log.student_name)}</strong> submitted an update
+                                    </div>
+                                    ${formatDateTimeBadge(log.updated_at)}
+                                </div>
+                                <div class="meta-tags">
+                                    ${log.house ? `<span class="tag blue">🏠 ${escapeHtml(log.house)}</span>` : ''}
+                                    ${log.roll_no ? `<span class="tag blue">#️⃣ Roll No: ${escapeHtml(String(log.roll_no))}</span>` : ''}
+                                    <span class="tag blue">✏️ Modified ${changedKeys.length} field(s) in this submission • Click to inspect</span>
+                                </div>
+                                <div class="details-panel">
+                                    ${changesHtml}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+            }
+
+            // --- RENDER SECTION 3: PENDING STUDENTS ---
+            const pendingContainer = document.getElementById('pending-container');
+            const filteredPending = pending.filter(s =>
+                (s.name || "").toLowerCase().includes(query)
+            );
+
+            if (filteredPending.length === 0) {
+                pendingContainer.innerHTML = `<div class="status-box">No pending students match your search.</div>`;
+            } else {
+                pendingContainer.innerHTML = filteredPending.map(student => `
+                    <div class="activity-card pending-card">
                         <div class="activity-top">
                             <div class="activity-title">
-                                ⏳ <strong>${escapeHtml(student.name)}</strong> hasn't submitted yet
+                                ⏳ <strong>${escapeHtml(student.name)}</strong> has not submitted their profile yet
                             </div>
-                            <span class="time-badge">Pending</span>
+                            <div class="datetime-box">
+                                <span class="dt-pill">Pending Submission</span>
+                            </div>
                         </div>
                     </div>
                 `).join('');
             }
-        }
-
-        function setFilter(filterType) {
-            currentFilter = filterType;
-            document.getElementById('tab-recent').classList.toggle('active', filterType === 'submitted');
-            document.getElementById('tab-pending').classList.toggle('active', filterType === 'pending');
-            renderFeed();
         }
 
         function escapeHtml(str) {
@@ -481,10 +736,10 @@
             }[m]));
         }
 
-        document.getElementById('search-box').addEventListener('input', renderFeed);
+        document.getElementById('search-box').addEventListener('input', renderAllSections);
 
         // Initial load
-        loadActivity();
+        loadAllData();
     </script>
 </body>
 </html>
