@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editorial Dispatch & Archive | JNV Varanasi Magazine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+    <title>Editorial Command Center | JNV Varanasi Magazine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --paper-bg: #f3ede0;
-            --paper-card: #fbf8f1;
-            --paper-dark: #e6decb;
-            --ink-black: #1c1917;
-            --ink-faded: #57534e;
-            --ink-light: #78716c;
-            --stamp-red: #991b1b;
-            --stamp-red-bg: rgba(153, 27, 27, 0.08);
-            --stamp-green: #166534;
-            --stamp-green-bg: rgba(22, 101, 52, 0.08);
-            --stamp-blue: #1e3a8a;
-            --stamp-blue-bg: rgba(30, 58, 138, 0.08);
-            --border-ink: #292524;
+            --bg-deep: #070b14;
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.72);
+            --card-hover: rgba(38, 53, 77, 0.9);
+            --glass-border: rgba(194, 166, 127, 0.22);
+            --border-subtle: rgba(148, 163, 184, 0.14);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-gold: #c2a67f;
+            --accent-gold-bright: #dfc298;
+            --accent-blue: #38bdf8;
+            --accent-emerald: #34d399;
+            --accent-rose: #fb7185;
+            --accent-amber: #fbbf24;
         }
 
         * {
@@ -28,231 +29,265 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Courier Prime', Courier, monospace;
-            background-color: var(--paper-bg);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
             background-image: 
-                radial-gradient(rgba(28, 25, 23, 0.04) 1px, transparent 0),
-                radial-gradient(rgba(28, 25, 23, 0.03) 1px, transparent 0);
-            background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
-            color: var(--ink-black);
+                radial-gradient(circle at 15% 0%, rgba(194, 166, 127, 0.14), transparent 40%),
+                radial-gradient(circle at 85% 10%, rgba(56, 189, 248, 0.08), transparent 35%),
+                linear-gradient(180deg, #070b14 0%, #0f172a 100%);
+            color: var(--text-main);
             line-height: 1.6;
+            min-height: 100vh;
             padding-bottom: 90px;
         }
 
-        /* Top Archival Teleprinter Ribbon */
-        .teleprinter-bar {
-            background: var(--ink-black);
-            color: var(--paper-bg);
-            font-size: 0.78rem;
-            padding: 8px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-bottom: 3px double var(--paper-bg);
-        }
-
-        .live-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #dc2626;
-            border-radius: 50%;
-            margin-right: 6px;
-            animation: blink 1.2s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.2; }
-        }
-
-        /* Newspaper Gazette Masthead */
-        .masthead {
-            max-width: 920px;
-            margin: 30px auto 0;
-            padding: 0 20px;
-        }
-
-        .masthead-box {
-            background: var(--paper-card);
-            border: 2px solid var(--border-ink);
-            box-shadow: 5px 5px 0px var(--border-ink);
-            padding: 35px 25px 28px;
+        /* Editorial Hero Header */
+        .header {
             text-align: center;
-            position: relative;
-        }
-
-        .masthead-box::before {
-            content: "";
-            position: absolute;
-            top: 5px; left: 5px; right: 5px; bottom: 5px;
-            border: 1px dashed var(--ink-light);
-            pointer-events: none;
-        }
-
-        .rubber-stamp {
-            display: inline-block;
-            font-family: 'Special Elite', monospace;
-            color: var(--stamp-red);
-            border: 2px solid var(--stamp-red);
-            padding: 4px 12px;
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transform: rotate(-2deg);
-            margin-bottom: 12px;
-            background: var(--stamp-red-bg);
-        }
-
-        .masthead h1 {
-            font-family: 'Special Elite', monospace;
-            font-size: 2.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--ink-black);
-            margin: 5px 0;
-        }
-
-        .masthead-sub {
-            font-size: 0.9rem;
-            color: var(--ink-faded);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-top: 1px solid var(--border-ink);
-            border-bottom: 1px solid var(--border-ink);
-            padding: 6px 0;
-            margin-top: 12px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-
-        .container {
-            max-width: 920px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        /* Typewriter Progress Meter */
-        .progress-ledger {
-            background: var(--paper-card);
-            border: 2px solid var(--border-ink);
-            box-shadow: 4px 4px 0px var(--border-ink);
-            padding: 18px 22px;
-            margin-bottom: 25px;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            font-weight: 700;
-            font-size: 0.88rem;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .progress-track {
-            width: 100%;
-            height: 18px;
-            background: var(--paper-dark);
-            border: 1px solid var(--border-ink);
+            padding: 55px 20px 40px;
+            border-bottom: 1px solid var(--glass-border);
             position: relative;
             overflow: hidden;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: repeating-linear-gradient(
-                45deg,
-                var(--ink-black),
-                var(--ink-black) 6px,
-                #44403c 6px,
-                #44403c 12px
-            );
-            width: 0%;
-            transition: width 0.5s ease;
+        .live-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(52, 211, 153, 0.1);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            color: var(--accent-emerald);
+            padding: 5px 14px;
+            border-radius: 999px;
+            font-size: 0.73rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
         }
 
-        /* Stats Cards (Library Index Cards) */
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-emerald);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-emerald);
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.35); opacity: 0.55; }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 5vw, 3.5rem);
+            font-style: italic;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 30%, #c2a67f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        /* Magazine Completion Progress Card */
+        .progress-banner {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.9));
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px);
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .progress-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-style: italic;
+            color: var(--accent-gold-bright);
+        }
+
+        .progress-stats {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .progress-stats strong {
+            color: var(--text-main);
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 11px;
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 999px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #c2a67f, #f3d7b0, #34d399);
+            border-radius: 999px;
+            transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* KPI Stats Bar */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 28px;
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
         .stat-card {
-            background: var(--paper-card);
-            border: 2px solid var(--border-ink);
-            box-shadow: 4px 4px 0px var(--border-ink);
-            padding: 16px;
-            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 20px 16px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s, border-color 0.2s;
         }
 
-        .stat-ref {
-            font-size: 0.68rem;
-            color: var(--ink-light);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: block;
-            margin-bottom: 4px;
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--glass-border);
         }
 
         .stat-number {
-            font-family: 'Special Elite', monospace;
-            font-size: 2.1rem;
-            color: var(--ink-black);
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            font-weight: 700;
             line-height: 1.1;
         }
 
         .stat-label {
-            font-size: 0.76rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
-            font-weight: 700;
-            color: var(--ink-faded);
-            margin-top: 4px;
+            letter-spacing: 1.2px;
+            color: var(--text-muted);
+            margin-top: 6px;
         }
 
-        /* Sticky Typewriter Controls Bar */
+        /* House Leaderboard */
+        .house-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .house-card {
+            background: rgba(15, 23, 42, 0.75);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .house-card:hover, .house-card.active {
+            border-color: var(--accent-gold);
+            background: rgba(194, 166, 127, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .house-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .house-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--accent-gold);
+        }
+
+        .house-bar {
+            height: 5px;
+            background: #1e293b;
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .house-bar-fill {
+            height: 100%;
+            border-radius: 99px;
+            transition: width 0.6s ease;
+        }
+
+        /* Sticky Command Bar */
         .controls {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
             position: sticky;
-            top: 10px;
-            z-index: 20;
-            background: var(--paper-card);
-            padding: 14px;
-            border: 2px solid var(--border-ink);
-            box-shadow: 4px 4px 0px var(--border-ink);
+            top: 12px;
+            z-index: 30;
+            background: rgba(11, 17, 32, 0.9);
+            backdrop-filter: blur(14px);
+            padding: 14px 16px;
+            border-radius: 14px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
         }
 
         .search-input {
             flex: 1;
             min-width: 210px;
-            padding: 10px 14px;
-            background: var(--paper-bg);
-            border: 1px solid var(--border-ink);
-            color: var(--ink-black);
-            font-family: 'Courier Prime', monospace;
+            padding: 11px 16px;
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            color: white;
             font-size: 0.92rem;
         }
 
         .search-input:focus {
-            outline: 2px solid var(--ink-black);
-            background: #fff;
+            outline: none;
+            border-color: var(--accent-gold);
         }
 
         .btn-group {
@@ -262,51 +297,38 @@
         }
 
         .btn {
-            padding: 9px 14px;
-            background: var(--paper-bg);
-            color: var(--ink-black);
-            border: 1px solid var(--border-ink);
-            box-shadow: 2px 2px 0px var(--border-ink);
-            font-family: 'Courier Prime', monospace;
+            padding: 10px 14px;
+            background: rgba(30, 41, 59, 0.9);
+            color: var(--text-muted);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
             font-size: 0.82rem;
-            font-weight: 700;
-            text-transform: uppercase;
+            font-weight: 500;
             cursor: pointer;
+            transition: all 0.2s;
             text-decoration: none;
-            transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .btn:hover {
-            background: var(--paper-dark);
-            transform: translate(-1px, -1px);
-            box-shadow: 3px 3px 0px var(--border-ink);
+        .btn.active, .btn:hover {
+            background: var(--accent-gold);
+            color: #090d16;
+            border-color: var(--accent-gold);
+            font-weight: 600;
         }
 
-        .btn:active {
-            transform: translate(1px, 1px);
-            box-shadow: 1px 1px 0px var(--border-ink);
+        .btn-outline-gold {
+            border-color: rgba(194, 166, 127, 0.45);
+            color: var(--accent-gold-bright);
         }
 
-        .btn.primary {
-            background: var(--ink-black);
-            color: var(--paper-card);
-        }
-
-        .btn.primary:hover {
-            background: #333;
-        }
-
-        .btn.stamp-btn {
-            color: var(--stamp-red);
-            border-color: var(--stamp-red);
-            box-shadow: 2px 2px 0px var(--stamp-red);
-        }
-
-        /* Section Headings */
+        /* Section Dividers */
         .section-divider {
-            margin: 50px 0 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--border-ink);
+            margin: 50px 0 22px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--glass-border);
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
@@ -315,157 +337,177 @@
         }
 
         .section-divider h2 {
-            font-family: 'Special Elite', monospace;
-            font-size: 1.65rem;
-            color: var(--ink-black);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            color: var(--accent-gold-bright);
+            font-style: italic;
         }
 
         .section-divider p {
-            font-size: 0.82rem;
-            color: var(--ink-faded);
-            margin-top: 3px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 4px;
         }
 
         .order-pill {
-            font-family: 'Special Elite', monospace;
-            font-size: 0.75rem;
-            background: var(--stamp-red-bg);
-            color: var(--stamp-red);
-            padding: 5px 12px;
-            border: 1px solid var(--stamp-red);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 0.74rem;
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(194, 166, 127, 0.12);
+            color: var(--accent-gold-bright);
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(194, 166, 127, 0.35);
         }
 
-        /* Dossier Activity Cards */
+        /* Activity Feed Cards */
         .activity-list {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
 
         .activity-card {
-            background: var(--paper-card);
-            border: 2px solid var(--border-ink);
-            box-shadow: 4px 4px 0px var(--border-ink);
-            padding: 18px 22px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 14px;
+            padding: 20px 22px;
             cursor: pointer;
-            transition: transform 0.12s, box-shadow 0.12s;
-            position: relative;
-        }
-
-        .activity-card:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px var(--border-ink);
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
         }
 
         .activity-card.history-card {
-            border-left: 6px solid var(--stamp-blue);
+            border-left-color: var(--accent-blue);
         }
 
-        .activity-card.recent-card {
-            border-left: 6px solid var(--stamp-green);
+        .activity-card:hover {
+            background: var(--card-hover);
+            border-color: rgba(194, 166, 127, 0.35);
+            transform: translateY(-2px);
         }
 
         .activity-top {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 15px;
+            gap: 14px;
             flex-wrap: wrap;
         }
 
         .activity-title {
             font-size: 1.05rem;
-            color: var(--ink-black);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .activity-title strong {
-            font-family: 'Special Elite', monospace;
-            font-size: 1.15rem;
-            letter-spacing: 0.5px;
-            text-decoration: underline;
-            text-underline-offset: 3px;
+            color: var(--accent-gold-bright);
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
-        .file-badge {
-            display: inline-block;
-            background: var(--ink-black);
-            color: var(--paper-card);
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 2px 8px;
-            margin-right: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .history-card .activity-title strong {
+            color: var(--accent-blue);
         }
 
-        /* Date & Time Typewriter Stamps */
+        .rank-badge {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--accent-gold);
+            font-size: 0.73rem;
+            font-weight: 600;
+            padding: 3px 9px;
+            border-radius: 6px;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Date & Time Badges */
         .datetime-box {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
             align-items: center;
         }
 
         .dt-pill {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.76rem;
-            color: var(--ink-black);
-            background: var(--paper-bg);
-            padding: 3px 9px;
-            border: 1px solid var(--border-ink);
+            color: #e2e8f0;
+            background: rgba(7, 11, 20, 0.85);
+            padding: 4px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-subtle);
             white-space: nowrap;
-            font-weight: 700;
         }
 
         .dt-relative {
-            font-family: 'Special Elite', monospace;
-            font-size: 0.76rem;
-            color: var(--stamp-red);
-            background: var(--stamp-red-bg);
-            border: 1px solid var(--stamp-red);
-            padding: 2px 8px;
-            text-transform: uppercase;
+            font-size: 0.75rem;
+            color: var(--accent-emerald);
+            background: rgba(52, 211, 153, 0.1);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            padding: 3px 9px;
+            border-radius: 99px;
+            font-weight: 600;
+        }
+
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
         }
 
         .meta-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-top: 12px;
-            padding-top: 10px;
-            border-top: 1px dashed var(--ink-light);
         }
 
         .tag {
             font-size: 0.75rem;
-            padding: 2px 9px;
-            border: 1px solid var(--border-ink);
-            background: var(--paper-bg);
-            color: var(--ink-black);
-            font-weight: 700;
-        }
-
-        .tag.green {
-            color: var(--stamp-green);
-            border-color: var(--stamp-green);
-            background: var(--stamp-green-bg);
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(194, 166, 127, 0.12);
+            color: var(--accent-gold-bright);
+            border: 1px solid rgba(194, 166, 127, 0.2);
         }
 
         .tag.blue {
-            color: var(--stamp-blue);
-            border-color: var(--stamp-blue);
-            background: var(--stamp-blue-bg);
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--accent-blue);
+            border-color: rgba(56, 189, 248, 0.25);
         }
 
-        /* Expandable Typed Dossier Details */
+        .preview-btn {
+            background: rgba(194, 166, 127, 0.18);
+            color: var(--accent-gold-bright);
+            border: 1px solid var(--accent-gold);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .preview-btn:hover {
+            background: var(--accent-gold);
+            color: #070b14;
+        }
+
+        /* Expandable Details */
         .details-panel {
             display: none;
             margin-top: 18px;
             padding-top: 18px;
-            border-top: 2px solid var(--border-ink);
+            border-top: 1px solid var(--border-subtle);
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
@@ -475,9 +517,10 @@
         }
 
         .detail-item {
-            background: var(--paper-bg);
+            background: rgba(7, 11, 20, 0.75);
             padding: 12px 14px;
-            border: 1px solid var(--border-ink);
+            border-radius: 10px;
+            border: 1px solid var(--border-subtle);
         }
 
         .detail-item.full-width {
@@ -485,200 +528,303 @@
         }
 
         .detail-label {
-            font-family: 'Special Elite', monospace;
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--stamp-red);
+            color: var(--accent-gold);
             margin-bottom: 4px;
         }
 
         .detail-value {
-            font-size: 0.92rem;
-            color: var(--ink-black);
+            font-size: 0.9rem;
+            color: #f1f5f9;
             word-break: break-word;
-            white-space: pre-wrap;
         }
 
-        /* Pending Roll-Call Grid */
+        /* Pending Students Aesthetic Roster Grid */
         .pending-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
             gap: 12px;
         }
 
-        .pending-slip {
-            background: var(--paper-card);
-            border: 1px solid var(--border-ink);
-            border-left: 5px solid var(--stamp-red);
-            box-shadow: 3px 3px 0px var(--border-ink);
-            padding: 12px 15px;
+        .pending-chip {
+            background: rgba(30, 41, 59, 0.55);
+            border: 1px solid var(--border-subtle);
+            border-left: 3px solid var(--accent-rose);
+            border-radius: 10px;
+            padding: 13px 16px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             gap: 10px;
+            transition: all 0.2s;
+        }
+
+        .pending-chip:hover {
+            background: rgba(38, 53, 77, 0.8);
+            border-color: rgba(251, 113, 133, 0.4);
         }
 
         .pending-name {
-            font-weight: 700;
+            font-weight: 500;
             font-size: 0.92rem;
+            color: #e2e8f0;
         }
 
-        .pending-stamp {
-            font-family: 'Special Elite', monospace;
-            font-size: 0.68rem;
-            color: var(--stamp-red);
-            border: 1px solid var(--stamp-red);
-            padding: 2px 6px;
+        .pending-status {
+            font-size: 0.7rem;
             text-transform: uppercase;
-            background: var(--stamp-red-bg);
+            letter-spacing: 0.8px;
+            color: var(--accent-rose);
+            background: rgba(251, 113, 133, 0.12);
+            padding: 3px 8px;
+            border-radius: 99px;
             white-space: nowrap;
         }
 
         .status-box {
             text-align: center;
             padding: 35px 20px;
-            background: var(--paper-card);
-            border: 2px dashed var(--border-ink);
-            color: var(--ink-faded);
-            font-weight: 700;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
         }
 
-        .footer-colophon {
-            text-align: center;
-            margin-top: 60px;
-            padding-top: 25px;
-            border-top: 3px double var(--border-ink);
-            font-size: 0.8rem;
-            color: var(--ink-faded);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
+        /* Magazine Card Preview Modal */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(4, 7, 15, 0.82);
+            backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 20px;
         }
 
-        @media (max-width: 680px) {
-            .stats-grid { grid-template-columns: 1fr 1fr; }
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .magazine-modal {
+            background: linear-gradient(160deg, #131c31 0%, #090d16 100%);
+            border: 1px solid var(--accent-gold);
+            border-radius: 18px;
+            max-width: 650px;
+            width: 100%;
+            max-height: 88vh;
+            overflow-y: auto;
+            padding: 34px;
+            position: relative;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75);
+        }
+
+        .modal-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            background: rgba(30, 41, 59, 0.9);
+            color: var(--text-main);
+            border: 1px solid var(--border-subtle);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .mag-header {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 22px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .mag-avatar {
+            width: 78px;
+            height: 78px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-gold);
+            object-fit: cover;
+            background: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            flex-shrink: 0;
+        }
+
+        .mag-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #fff;
+            line-height: 1.15;
+        }
+
+        .mag-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--accent-gold-bright);
+            background: rgba(194, 166, 127, 0.08);
+            border-left: 3px solid var(--accent-gold);
+            padding: 12px 16px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 700px) {
+            .stats-grid, .house-grid { grid-template-columns: 1fr 1fr; }
             .details-panel { grid-template-columns: 1fr; }
-            .masthead h1 { font-size: 2rem; }
-            .masthead-sub { flex-direction: column; align-items: center; }
+            .activity-top { flex-direction: column; gap: 8px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Teleprinter Ribbon -->
-    <div class="teleprinter-bar">
-        <div><span class="live-dot"></span>TELEPRINTER FEED // JNV VARANASI EDITORIAL ROOM</div>
-        <div id="live-clock">SYNCHRONIZING ARCHIVE CLOCK...</div>
-    </div>
-
-    <!-- Gazette Masthead -->
-    <header class="masthead">
-        <div class="masthead-box">
-            <div class="rubber-stamp">ARCHIVE VERIFIED • ISSUE NO. 01</div>
-            <h1>The Navodaya Chronicle</h1>
-            <p style="font-style: italic; color: var(--ink-faded);">Student Profile Submission Ledger & Activity Log</p>
-            <div class="masthead-sub">
-                <span>LOCATION: GAJOKHAR, VARANASI</span>
-                <span>SORT ORDER: DESCENDING (NEWEST FIRST)</span>
-                <span id="last-sync-text">STATUS: READY</span>
-            </div>
+    <header class="header">
+        <div class="live-pill">
+            <span class="pulse-dot"></span>
+            Live Magazine Editorial Dashboard
         </div>
+        <h1>JNV Varanasi</h1>
+        <p>Issue No. 1 • Real-Time Activity & Submission Log</p>
     </header>
 
     <main class="container">
-        <!-- Typewriter Progress Meter -->
-        <div class="progress-ledger">
-            <div class="progress-header">
-                <span>MAGAZINE COMPLETION PROGRESS</span>
-                <span id="progress-text">0 / 65 FILED (0%)</span>
+        <!-- Magazine Completion Banner -->
+        <div class="progress-banner">
+            <div class="progress-top">
+                <div class="progress-title">Magazine Batch Completion</div>
+                <div class="progress-stats">
+                    <strong id="progress-pct">0%</strong> Ready for Print (<span id="progress-fraction">0 / 66</span> Students)
+                </div>
             </div>
             <div class="progress-track">
-                <div class="progress-fill" id="progress-bar"></div>
+                <div class="progress-fill" id="progress-fill"></div>
             </div>
         </div>
 
-        <!-- Index Card Stats -->
+        <!-- KPI Summary -->
         <div class="stats-grid">
             <div class="stat-card">
-                <span class="stat-ref">INDEX // REF-01</span>
                 <div class="stat-number" id="submitted-count">0</div>
-                <div class="stat-label">Profiles Filed</div>
+                <div class="stat-label">Profiles Updated</div>
             </div>
             <div class="stat-card">
-                <span class="stat-ref">INDEX // REF-02</span>
                 <div class="stat-number" id="history-count">0</div>
-                <div class="stat-label">History Dispatches</div>
+                <div class="stat-label">Total History Logs</div>
             </div>
             <div class="stat-card">
-                <span class="stat-ref">INDEX // REF-03</span>
-                <div class="stat-number" id="pending-count">0</div>
-                <div class="stat-label">Awaiting Filing</div>
+                <div class="stat-number" id="pending-count" style="color: var(--accent-rose);">0</div>
+                <div class="stat-label">Pending Students</div>
             </div>
             <div class="stat-card">
-                <span class="stat-ref">INDEX // REF-04</span>
-                <div class="stat-number" id="total-count">0</div>
+                <div class="stat-number" id="total-count">66</div>
                 <div class="stat-label">Total Roster</div>
             </div>
         </div>
 
-        <!-- Sticky Search & Navigation Bar -->
+        <!-- House Standings Leaderboard -->
+        <div class="house-grid">
+            <div class="house-card" id="house-Aravali" onclick="toggleHouseFilter('Aravali')">
+                <div class="house-top">
+                    <span>🏔️ Aravali</span>
+                    <span class="house-count" id="count-Aravali">0</span>
+                </div>
+                <div class="house-bar"><div class="house-bar-fill" id="bar-Aravali" style="background:#38bdf8; width:0%"></div></div>
+            </div>
+            <div class="house-card" id="house-Nilgiri" onclick="toggleHouseFilter('Nilgiri')">
+                <div class="house-top">
+                    <span>🌲 Nilgiri</span>
+                    <span class="house-count" id="count-Nilgiri">0</span>
+                </div>
+                <div class="house-bar"><div class="house-bar-fill" id="bar-Nilgiri" style="background:#34d399; width:0%"></div></div>
+            </div>
+            <div class="house-card" id="house-Shivalik" onclick="toggleHouseFilter('Shivalik')">
+                <div class="house-top">
+                    <span>🔥 Shivalik</span>
+                    <span class="house-count" id="count-Shivalik">0</span>
+                </div>
+                <div class="house-bar"><div class="house-bar-fill" id="bar-Shivalik" style="background:#fb7185; width:0%"></div></div>
+            </div>
+            <div class="house-card" id="house-Udaygiri" onclick="toggleHouseFilter('Udaygiri')">
+                <div class="house-top">
+                    <span>☀️ Udaygiri</span>
+                    <span class="house-count" id="count-Udaygiri">0</span>
+                </div>
+                <div class="house-bar"><div class="house-bar-fill" id="bar-Udaygiri" style="background:#fbbf24; width:0%"></div></div>
+            </div>
+        </div>
+
+        <!-- Sticky Search & Quick Jump Bar -->
         <div class="controls">
-            <input type="text" id="search-box" class="search-input" placeholder="Type student name or house to filter...">
+            <input type="text" id="search-box" class="search-input" placeholder="Search student name, house, or roll no...">
             <div class="btn-group">
-                <a href="#section-recent" class="btn">1. Filed Profiles</a>
-                <a href="#section-history" class="btn">2. History Log</a>
-                <a href="#section-pending" class="btn stamp-btn">3. Pending List</a>
-                <button class="btn" onclick="exportCSV()">⬇ Export CSV</button>
-                <button class="btn primary" onclick="loadAllData()">↻ Fetch Latest</button>
+                <a href="#section-recent" class="btn">✨ Recent</a>
+                <a href="#section-history" class="btn">🕒 History Log</a>
+                <a href="#section-pending" class="btn">⏳ Pending</a>
+                <button class="btn btn-outline-gold" onclick="exportToCSV()">⬇ Export CSV</button>
+                <button class="btn active" onclick="loadAllData()">↻ Refresh</button>
             </div>
         </div>
 
         <!-- SECTION 1: RECENT PROFILE UPDATES (DESCENDING) -->
         <div id="section-recent" class="section-divider">
             <div>
-                <h2>I. Recently Filed Profiles</h2>
-                <p>Click any dossier card to unfold and inspect the student's full submission</p>
+                <h2>1. Recent Profile Updates</h2>
+                <p>Latest updated profiles • Click any card to inspect all fields or preview magazine card</p>
             </div>
-            <span class="order-pill">↓ Newest Submission on Top</span>
+            <span class="order-pill">↓ Descending (Newest First)</span>
         </div>
         <div id="recent-container" class="activity-list">
-            <div class="status-box"> typing... fetching latest dossiers from database...</div>
+            <div class="status-box">Loading recent profile updates...</div>
         </div>
 
-        <!-- SECTION 2: FULL SUBMISSION HISTORY LOG (MULTIPLE UPDATES) -->
+        <!-- SECTION 2: FULL SUBMISSION HISTORY LOG -->
         <div id="section-history" class="section-divider">
             <div>
-                <h2>II. Full Submission History Log</h2>
-                <p>Chronological wire log of every single update (including repeat edits by the same student)</p>
+                <h2>2. Full Submission History Log</h2>
+                <p>Every individual form submission with exact date & time (including repeat updates)</p>
             </div>
-            <span class="order-pill">↓ Exact Date & Time (Descending)</span>
+            <span class="order-pill">↓ Descending (Newest First)</span>
         </div>
         <div id="history-container" class="activity-list">
-            <div class="status-box"> typing... reading chronological dispatch logs...</div>
+            <div class="status-box">Loading full submission history log...</div>
         </div>
 
         <!-- SECTION 3: PENDING STUDENTS -->
         <div id="section-pending" class="section-divider">
             <div>
-                <h2>III. Pending Roll-Call (Not Submitted Yet)</h2>
-                <p>Students from the official class roster who have not filled out their magazine profile yet</p>
+                <h2>3. Pending Students Roster</h2>
+                <p>Students who haven't filled out their magazine profile yet</p>
             </div>
-            <button class="btn stamp-btn" id="copy-pending-btn" onclick="copyPendingWhatsApp()">📋 Copy Pending List for WhatsApp</button>
+            <button class="btn btn-outline-gold" id="copy-pending-btn" onclick="copyPendingForWhatsApp()">
+                📋 Copy Pending List for WhatsApp
+            </button>
         </div>
         <div id="pending-container" class="pending-grid">
-            <div class="status-box" style="grid-column: 1 / -1;"> typing... checking class roster...</div>
+            <div class="status-box">Loading pending list...</div>
         </div>
-
-        <footer class="footer-colophon">
-            PRINTED BY JNV VARANASI ARCHIVE PRESS • ALL SUBMISSIONS TIMESTAMPED IN IST
-        </footer>
     </main>
+
+    <!-- Magazine Card Preview Modal -->
+    <div class="modal-backdrop" id="preview-modal" onclick="if(event.target === this) closeModal()">
+        <div class="magazine-modal" id="modal-content"></div>
+    </div>
 
     <script>
         const SUPABASE_URL = "https://pzplzdgdlnjfwbklxbfd.supabase.co";
         const SUPABASE_KEY = "sb_publishable_N3pli21Nl9PtLXeFkiuizg_W5Aw5MpM";
 
-        // Complete official 65-student roster from index.html
+        // Full 66-student master roster from index.html so Pending is always 100% accurate
         const MASTER_ROSTER = [
             "Abhijeet Yadav", "Aditya Patel", "Aditya Singh Kushwaha", "Ajeet Kumar",
             "Akhilesh Kumar Verma", "Alok Kumar", "Amrita Tiwari", "Anamika",
@@ -729,51 +875,27 @@
         PROFILE_FIELDS.forEach(f => FIELD_LABELS[f.key] = f.label);
 
         let allStudents = [];
+        let submittedGlobal = [];
+        let pendingGlobal = [];
         let historyLogs = [];
-        let currentPendingList = [];
-        let currentSubmittedList = [];
-
-        // Live Typewriter Clock
-        function updateClock() {
-            const now = new Date();
-            const d = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
-            const t = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-            document.getElementById('live-clock').textContent = `${d} • ${t} IST`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // Strict check for genuinely filled fields
-        function is meaningfulValue(val) {
-            if (val === null || val === undefined) return false;
-            const str = String(val).trim();
-            if (str === "" || str.toLowerCase() === "null" || str.toLowerCase() === "undefined" || str === "0") return false;
-            return true;
-        }
+        let historyTableExists = true;
+        let activeHouseFilter = null;
 
         function getFilledFields(student) {
-            return PROFILE_FIELDS.filter(f => isMeaningfulValue(student[f.key]));
+            return PROFILE_FIELDS.filter(f => {
+                const val = student[f.key];
+                return val !== null && val !== undefined && String(val).trim() !== "";
+            });
         }
 
-        function isMeaningfulValue(val) {
-            if (val === null || val === undefined) return false;
-            const str = String(val).trim();
-            return str !== "" && str.toLowerCase() !== "null" && str.toLowerCase() !== "undefined";
-        }
-
-        // Format exact Date, exact Time (with seconds), and relative badge
         function formatDateTimeBadge(dateString) {
             if (!dateString) {
-                return `
-                    <div class="datetime-box">
-                        <span class="dt-pill">DATE: ARCHIVE ENTRY</span>
-                    </div>
-                `;
+                return `<div class="datetime-box"><span class="dt-pill">📅 Date & Time Recorded</span></div>`;
             }
 
             const date = new Date(dateString);
             if (isNaN(date.getTime())) {
-                return `<div class="datetime-box"><span class="dt-pill">DATE: UNKNOWN</span></div>`;
+                return `<div class="datetime-box"><span class="dt-pill">📅 Timestamp unavailable</span></div>`;
             }
 
             const now = new Date();
@@ -789,29 +911,26 @@
                 day: '2-digit',
                 month: 'short',
                 year: 'numeric'
-            }).toUpperCase();
+            });
 
             const formattedTime = date.toLocaleTimeString('en-IN', {
                 hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit',
                 hour12: true
-            }).toUpperCase();
+            });
 
             return `
                 <div class="datetime-box">
                     <span class="dt-relative">${relative}</span>
-                    <span class="dt-pill">DATE: ${formattedDate}</span>
-                    <span class="dt-pill">TIME: ${formattedTime}</span>
+                    <span class="dt-pill">📅 ${formattedDate}</span>
+                    <span class="dt-pill">🕒 ${formattedTime}</span>
                 </div>
             `;
         }
 
         async function loadAllData() {
-            document.getElementById('last-sync-text').textContent = "STATUS: FETCHING WIRE...";
-
             try {
-                // 1. Fetch students from Supabase
                 const studentRes = await fetch(`${SUPABASE_URL}/rest/v1/student?select=*`, {
                     headers: {
                         'apikey': SUPABASE_KEY,
@@ -820,12 +939,22 @@
                 });
 
                 if (!studentRes.ok) throw new Error(await studentRes.text());
-                const rawStudents = await studentRes.json();
+                const dbStudents = await studentRes.json();
 
-                // Reverse raw PostgreSQL heap order so newest updates are at index 0
-                allStudents = rawStudents.reverse();
+                // Reverse PostgreSQL raw order so most recently modified heap rows come first
+                const reversedDb = [...dbStudents].reverse();
+                const dbMap = new Map();
+                reversedDb.forEach((s, idx) => {
+                    if (s.name) dbMap.set(s.name.trim(), { ...s, reverseHeapOrder: idx });
+                });
 
-                // 2. Fetch history logs ordered newest first
+                // Merge MASTER_ROSTER with any extra names in DB so no student is ever missing
+                const mergedNames = new Set([...MASTER_ROSTER, ...Array.from(dbMap.keys())]);
+                allStudents = Array.from(mergedNames).map((name, idx) => {
+                    return dbMap.get(name) || { name, reverseHeapOrder: 9999 + idx };
+                });
+
+                // Fetch history logs
                 const historyRes = await fetch(`${SUPABASE_URL}/rest/v1/activity_logs?select=*&order=updated_at.desc`, {
                     headers: {
                         'apikey': SUPABASE_KEY,
@@ -835,30 +964,36 @@
 
                 if (historyRes.ok) {
                     historyLogs = await historyRes.json();
+                    historyTableExists = true;
                 } else {
                     historyLogs = [];
+                    historyTableExists = false;
                 }
 
                 renderAllSections();
-                const syncTime = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                document.getElementById('last-sync-text').textContent = `LAST SYNC: ${syncTime}`;
 
             } catch (error) {
                 console.error("Error loading data:", error);
                 document.getElementById('recent-container').innerHTML =
-                    `<div class="status-box" style="color:var(--stamp-red);">ERROR READING ARCHIVE: ${escapeHtml(error.message)}</div>`;
+                    `<div class="status-box" style="color:#fb7185;">❌ Error loading data: ${error.message}</div>`;
             }
+        }
+
+        function toggleHouseFilter(house) {
+            activeHouseFilter = (activeHouseFilter === house) ? null : house;
+            ['Aravali', 'Nilgiri', 'Shivalik', 'Udaygiri'].forEach(h => {
+                document.getElementById(`house-${h}`).classList.toggle('active', activeHouseFilter === h);
+            });
+            renderAllSections();
         }
 
         function renderAllSections() {
             const query = document.getElementById('search-box').value.toLowerCase().trim();
 
-            // Count updates per student in historyLogs
             const updateCounts = {};
             const latestLogTimeByStudent = {};
             historyLogs.forEach(log => {
-                const name = (log.student_name || "").trim();
-                if (!name) return;
+                const name = log.student_name;
                 updateCounts[name] = (updateCounts[name] || 0) + 1;
                 if (!latestLogTimeByStudent[name]) {
                     latestLogTimeByStudent[name] = log.updated_at;
@@ -867,122 +1002,106 @@
 
             const submitted = [];
             const pending = [];
-            const seenNames = new Set();
+            const houseCounts = { Aravali: 0, Nilgiri: 0, Shivalik: 0, Udaygiri: 0 };
 
-            // Evaluate students returned from Supabase
-            allStudents.forEach((student, index) => {
-                const cleanName = (student.name || "").trim();
-                if (!cleanName) return;
-                seenNames.add(cleanName.toLowerCase());
-
+            allStudents.forEach(student => {
                 const filled = getFilledFields(student);
-                const effectiveTimestamp = latestLogTimeByStudent[cleanName] || student.updated_at || student.created_at || null;
-
-                // FIXED BUG: A student is ONLY marked as Submitted if they have filled > 0 profile fields!
+                // Strictly require at least 1 filled profile field to count as Submitted!
                 if (filled.length > 0) {
+                    const effectiveTimestamp = latestLogTimeByStudent[student.name] || student.updated_at || student.created_at || null;
                     submitted.push({
                         ...student,
-                        name: cleanName,
                         filledFields: filled,
-                        effectiveTimestamp,
-                        reverseHeapOrder: index
+                        effectiveTimestamp
                     });
+                    if (student.house && houseCounts[student.house] !== undefined) {
+                        houseCounts[student.house]++;
+                    }
                 } else {
-                    pending.push({ name: cleanName, status: 'AWAITING SUBMISSION' });
+                    pending.push(student);
                 }
             });
 
-            // Also check MASTER_ROSTER so any student missing from the DB table still shows in Pending
-            MASTER_ROSTER.forEach(rosterName => {
-                if (!seenNames.has(rosterName.toLowerCase())) {
-                    pending.push({ name: rosterName, status: 'AWAITING SUBMISSION' });
-                }
-            });
-
-            // Sort Pending alphabetically for easy roll-call reading
-            pending.sort((a, b) => a.name.localeCompare(b.name));
-
-            // Sort Submitted strictly in DESCENDING order (most recent at the top)
+            // Sort submitted strictly in DESCENDING order (newest first)
             submitted.sort((a, b) => {
+                if (a.reverseHeapOrder !== b.reverseHeapOrder && a.effectiveTimestamp === b.effectiveTimestamp) {
+                    return a.reverseHeapOrder - b.reverseHeapOrder;
+                }
                 const timeA = a.effectiveTimestamp ? new Date(a.effectiveTimestamp).getTime() : 0;
                 const timeB = b.effectiveTimestamp ? new Date(b.effectiveTimestamp).getTime() : 0;
-                if (timeB !== timeA) {
-                    return timeB - timeA;
-                }
+                if (timeB !== timeA) return timeB - timeA;
                 return a.reverseHeapOrder - b.reverseHeapOrder;
             });
 
-            currentPendingList = pending;
-            currentSubmittedList = submitted;
+            // Sort pending alphabetically
+            pending.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
 
-            // Synthesize fallback history entries if activity_logs is empty or missing some submitted students
-            let combinedHistory = [...historyLogs];
-            const loggedNames = new Set(historyLogs.map(l => (l.student_name || "").toLowerCase()));
-            submitted.forEach(s => {
-                if (!loggedNames.has(s.name.toLowerCase())) {
-                    const snap = {};
-                    s.filledFields.forEach(f => snap[f.key] = s[f.key]);
-                    combinedHistory.push({
-                        student_name: s.name,
-                        house: s.house,
-                        roll_no: s.roll_no,
-                        changed_fields: snap,
-                        updated_at: s.effectiveTimestamp
-                    });
-                }
-            });
+            submittedGlobal = submitted;
+            pendingGlobal = pending;
 
-            combinedHistory.sort((a, b) => {
-                const tA = a.updated_at ? new Date(a.updated_at).getTime() : 0;
-                const tB = b.updated_at ? new Date(b.updated_at).getTime() : 0;
-                return tB - tA;
-            });
-
-            // Update Stats & Progress Bar
-            const totalRosterCount = submitted.length + pending.length;
-            const pct = totalRosterCount > 0 ? Math.round((submitted.length / totalRosterCount) * 100) : 0;
+            // Update Progress & Stats
+            const total = allStudents.length;
+            const pct = total > 0 ? Math.round((submitted.length / total) * 100) : 0;
+            document.getElementById('progress-pct').textContent = `${pct}%`;
+            document.getElementById('progress-fraction').textContent = `${submitted.length} / ${total}`;
+            document.getElementById('progress-fill').style.width = `${pct}%`;
 
             document.getElementById('submitted-count').textContent = submitted.length;
-            document.getElementById('history-count').textContent = combinedHistory.length;
+            document.getElementById('history-count').textContent = historyLogs.length || submitted.length;
             document.getElementById('pending-count').textContent = pending.length;
-            document.getElementById('total-count').textContent = totalRosterCount;
-            document.getElementById('progress-text').textContent = `${submitted.length} / ${totalRosterCount} FILED (${pct}%)`;
-            document.getElementById('progress-bar').style.width = `${pct}%`;
+            document.getElementById('total-count').textContent = total;
+
+            // Update House Leaderboard
+            ['Aravali', 'Nilgiri', 'Shivalik', 'Udaygiri'].forEach(h => {
+                const c = houseCounts[h] || 0;
+                document.getElementById(`count-${h}`).textContent = `${c} done`;
+                const barPct = Math.min(100, Math.round((c / 17) * 100));
+                document.getElementById(`bar-${h}`).style.width = `${barPct}%`;
+            });
 
             // --- RENDER SECTION 1: RECENT PROFILE UPDATES ---
-            const filteredSubmitted = submitted.filter(s =>
-                s.name.toLowerCase().includes(query) ||
-                (s.house || "").toLowerCase().includes(query)
-            );
+            const filteredSubmitted = submitted.filter(s => {
+                const matchesHouse = !activeHouseFilter || s.house === activeHouseFilter;
+                const matchesQuery =
+                    (s.name || "").toLowerCase().includes(query) ||
+                    (s.house || "").toLowerCase().includes(query) ||
+                    String(s.roll_no || "").includes(query);
+                return matchesHouse && matchesQuery;
+            });
 
             const recentContainer = document.getElementById('recent-container');
             if (filteredSubmitted.length === 0) {
-                recentContainer.innerHTML = `<div class="status-box">NO FILED PROFILES MATCH YOUR FILTER.</div>`;
+                recentContainer.innerHTML = `<div class="status-box">No matching updated profiles found.</div>`;
             } else {
                 recentContainer.innerHTML = filteredSubmitted.map((student, idx) => {
                     const count = updateCounts[student.name] || 1;
+                    const completionPct = Math.round((student.filledFields.length / PROFILE_FIELDS.length) * 100);
                     const detailsHtml = student.filledFields.map(f => `
                         <div class="detail-item ${f.full ? 'full-width' : ''}">
-                            <div class="detail-label">${escapeHtml(f.label)}</div>
+                            <div class="detail-label">${f.label}</div>
                             <div class="detail-value">${escapeHtml(String(student[f.key]))}</div>
                         </div>
                     `).join('');
 
                     return `
-                        <div class="activity-card recent-card" onclick="this.classList.toggle('expanded')">
+                        <div class="activity-card" onclick="this.classList.toggle('expanded')">
                             <div class="activity-top">
                                 <div class="activity-title">
-                                    <span class="file-badge">DOSSIER #${idx + 1}</span>
-                                    <strong>${escapeHtml(student.name)}</strong> updated their profile
+                                    <span class="rank-badge">#${idx + 1} Latest</span>
+                                    ✨ <strong>${escapeHtml(student.name)}</strong> updated their profile
                                 </div>
                                 ${formatDateTimeBadge(student.effectiveTimestamp)}
                             </div>
-                            <div class="meta-tags">
-                                <span class="tag green">[ FILED ]</span>
-                                ${student.house ? `<span class="tag">HOUSE: ${escapeHtml(student.house.toUpperCase())}</span>` : ''}
-                                ${student.roll_no ? `<span class="tag">ROLL NO: ${escapeHtml(String(student.roll_no))}</span>` : ''}
-                                <span class="tag">REVISIONS: ${count}</span>
-                                <span class="tag">${student.filledFields.length} FIELDS RECORDED • [CLICK TO OPEN DOSSIER]</span>
+                            <div class="meta-row">
+                                <div class="meta-tags">
+                                    ${student.house ? `<span class="tag">🏠 ${escapeHtml(student.house)}</span>` : ''}
+                                    ${student.roll_no ? `<span class="tag">#️⃣ Roll No: ${escapeHtml(String(student.roll_no))}</span>` : ''}
+                                    <span class="tag">🔄 ${count} ${count > 1 ? 'Updates' : 'Update'}</span>
+                                    <span class="tag">📊 ${student.filledFields.length}/${PROFILE_FIELDS.length} fields (${completionPct}%)</span>
+                                </div>
+                                <button class="preview-btn" onclick="event.stopPropagation(); openPreviewModal('${escapeHtml(student.name)}')">
+                                    ✦ Preview Magazine Card
+                                </button>
                             </div>
                             <div class="details-panel">
                                 ${detailsHtml}
@@ -994,41 +1113,49 @@
 
             // --- RENDER SECTION 2: FULL SUBMISSION HISTORY LOG ---
             const historyContainer = document.getElementById('history-container');
-            const filteredHistory = combinedHistory.filter(log =>
-                (log.student_name || "").toLowerCase().includes(query) ||
-                (log.house || "").toLowerCase().includes(query)
+            const sortedHistory = [...historyLogs].sort((a, b) =>
+                new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
             );
 
+            const filteredHistory = sortedHistory.filter(log => {
+                const matchesHouse = !activeHouseFilter || log.house === activeHouseFilter;
+                const matchesQuery =
+                    (log.student_name || "").toLowerCase().includes(query) ||
+                    (log.house || "").toLowerCase().includes(query);
+                return matchesHouse && matchesQuery;
+            });
+
             if (filteredHistory.length === 0) {
-                historyContainer.innerHTML = `<div class="status-box">NO HISTORY DISPATCH LOGS FOUND.</div>`;
+                historyContainer.innerHTML = `<div class="status-box">No history log entries match your filter yet.</div>`;
             } else {
                 historyContainer.innerHTML = filteredHistory.map((log, idx) => {
                     const changedObj = log.changed_fields || {};
-                    const changedKeys = Object.keys(changedObj).filter(k => isMeaningfulValue(changedObj[k]));
+                    const changedKeys = Object.keys(changedObj);
 
                     const changesHtml = changedKeys.length > 0
                         ? changedKeys.map(k => `
                             <div class="detail-item">
-                                <div class="detail-label">${escapeHtml(FIELD_LABELS[k] || k)} (FILED IN THIS REVISION)</div>
+                                <div class="detail-label">${escapeHtml(FIELD_LABELS[k] || k)}</div>
                                 <div class="detail-value">${escapeHtml(String(changedObj[k]))}</div>
                             </div>
                         `).join('')
-                        : `<div class="detail-item full-width"><div class="detail-value">Profile re-saved without changes.</div></div>`;
+                        : `<div class="detail-item full-width"><div class="detail-value">Profile saved with existing values.</div></div>`;
 
                     return `
                         <div class="activity-card history-card" onclick="this.classList.toggle('expanded')">
                             <div class="activity-top">
                                 <div class="activity-title">
-                                    <span class="file-badge">LOG #${filteredHistory.length - idx}</span>
-                                    <strong>${escapeHtml(log.student_name)}</strong> transmitted a profile update
+                                    <span class="rank-badge">Log #${filteredHistory.length - idx}</span>
+                                    🕒 <strong>${escapeHtml(log.student_name)}</strong> submitted an update
                                 </div>
                                 ${formatDateTimeBadge(log.updated_at)}
                             </div>
-                            <div class="meta-tags">
-                                <span class="tag blue">[ WIRE LOG ]</span>
-                                ${log.house ? `<span class="tag">HOUSE: ${escapeHtml(log.house.toUpperCase())}</span>` : ''}
-                                ${log.roll_no ? `<span class="tag">ROLL NO: ${escapeHtml(String(log.roll_no))}</span>` : ''}
-                                <span class="tag">${changedKeys.length} FIELD(S) UPDATED • [CLICK TO INSPECT REVISION]</span>
+                            <div class="meta-row">
+                                <div class="meta-tags">
+                                    ${log.house ? `<span class="tag blue">🏠 ${escapeHtml(log.house)}</span>` : ''}
+                                    ${log.roll_no ? `<span class="tag blue">#️⃣ Roll No: ${escapeHtml(String(log.roll_no))}</span>` : ''}
+                                    <span class="tag blue">✏️ ${changedKeys.length} field(s) recorded • Click to expand</span>
+                                </div>
                             </div>
                             <div class="details-panel">
                                 ${changesHtml}
@@ -1041,65 +1168,102 @@
             // --- RENDER SECTION 3: PENDING STUDENTS ---
             const pendingContainer = document.getElementById('pending-container');
             const filteredPending = pending.filter(s =>
-                s.name.toLowerCase().includes(query)
+                (s.name || "").toLowerCase().includes(query)
             );
 
             if (filteredPending.length === 0) {
-                pendingContainer.innerHTML = `<div class="status-box" style="grid-column: 1 / -1;">ALL MATCHING STUDENTS HAVE FILED THEIR PROFILES!</div>`;
+                pendingContainer.innerHTML = `<div class="status-box" style="grid-column: 1 / -1;">🎉 Every single student matching this search has submitted their profile!</div>`;
             } else {
-                pendingContainer.innerHTML = filteredPending.map((student, idx) => `
-                    <div class="pending-slip">
-                        <div class="pending-name">${idx + 1}. ${escapeHtml(student.name)}</div>
-                        <span class="pending-stamp">PENDING</span>
+                pendingContainer.innerHTML = filteredPending.map((student, i) => `
+                    <div class="pending-chip">
+                        <span class="pending-name">${i + 1}. ${escapeHtml(student.name)}</span>
+                        <span class="pending-status">Pending</span>
                     </div>
                 `).join('');
             }
         }
 
-        // Copy Pending Students formatted for WhatsApp
-        function copyPendingWhatsApp() {
-            if (currentPendingList.length === 0) {
-                alert("All students have submitted!");
-                return;
-            }
-            const lines = [
-                `*📢 JNV Varanasi Magazine — Pending Profiles (${currentPendingList.length})*`,
-                `Please submit your profile on the portal as soon as possible:\n`
-            ];
-            currentPendingList.forEach((s, i) => {
-                lines.push(`${i + 1}. ${s.name}`);
-            });
+        // Magazine Card Live Preview Modal
+        function openPreviewModal(studentName) {
+            const student = submittedGlobal.find(s => s.name === studentName);
+            if (!student) return;
 
-            navigator.clipboard.writeText(lines.join('\n')).then(() => {
-                const btn = document.getElementById('copy-pending-btn');
-                const original = btn.textContent;
-                btn.textContent = "✓ COPIED TO CLIPBOARD!";
-                setTimeout(() => btn.textContent = original, 2500);
-            });
+            const initials = student.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+            const avatarHtml = student.photo_url
+                ? `<img src="${escapeHtml(student.photo_url)}" class="mag-avatar" alt="${escapeHtml(student.name)}" onerror="this.outerHTML='<div class=\\'mag-avatar\\'>${initials}</div>'">`
+                : `<div class="mag-avatar">${initials}</div>`;
+
+            const quoteHtml = student.favourite_quote
+                ? `<div class="mag-quote">“${escapeHtml(student.favourite_quote)}”</div>`
+                : '';
+
+            const bodyHtml = student.filledFields
+                .filter(f => f.key !== 'favourite_quote' && f.key !== 'photo_url')
+                .map(f => `
+                    <div class="detail-item ${f.full ? 'full-width' : ''}">
+                        <div class="detail-label">${f.label}</div>
+                        <div class="detail-value">${escapeHtml(String(student[f.key]))}</div>
+                    </div>
+                `).join('');
+
+            document.getElementById('modal-content').innerHTML = `
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <div class="mag-header">
+                    ${avatarHtml}
+                    <div>
+                        <div class="mag-name">${escapeHtml(student.name)}</div>
+                        <div class="meta-tags" style="margin-top:8px;">
+                            ${student.house ? `<span class="tag">🏠 ${escapeHtml(student.house)} House</span>` : ''}
+                            ${student.roll_no ? `<span class="tag">#️⃣ Roll No. ${escapeHtml(String(student.roll_no))}</span>` : ''}
+                            ${student.instagram ? `<span class="tag">📸 @${escapeHtml(student.instagram.replace('@',''))}</span>` : ''}
+                        </div>
+                    </div>
+                </div>
+                ${quoteHtml}
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    ${bodyHtml}
+                </div>
+            `;
+
+            document.getElementById('preview-modal').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('preview-modal').classList.remove('open');
+        }
+
+        // Copy Pending Students list for WhatsApp
+        function copyPendingForWhatsApp() {
+            if (pendingGlobal.length === 0) return;
+            const names = pendingGlobal.map((s, i) => `${i + 1}. ${s.name}`).join('\n');
+            const message = `📢 *JNV Varanasi Magazine – Pending Profile Submissions (${pendingGlobal.length})*\n\nPlease submit your profile on the portal soon:\n\n${names}`;
+            navigator.clipboard.writeText(message);
+
+            const btn = document.getElementById('copy-pending-btn');
+            const oldText = btn.textContent;
+            btn.textContent = "✅ Copied for WhatsApp!";
+            setTimeout(() => btn.textContent = oldText, 2500);
         }
 
         // Export submitted profiles to CSV
-        function exportCSV() {
-            if (currentSubmittedList.length === 0) {
-                alert("No submitted profiles to export yet.");
-                return;
-            }
+        function exportToCSV() {
+            if (submittedGlobal.length === 0) return;
             const headers = ['Name', 'Updated At', ...PROFILE_FIELDS.map(f => f.label)];
-            const rows = currentSubmittedList.map(s => {
-                const cells = [
-                    s.name,
-                    s.effectiveTimestamp ? new Date(s.effectiveTimestamp).toLocaleString('en-IN') : '',
-                    ...PROFILE_FIELDS.map(f => s[f.key] !== undefined && s[f.key] !== null ? String(s[f.key]) : '')
-                ];
-                return cells.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',');
-            });
+            const rows = submittedGlobal.map(s => [
+                s.name || '',
+                s.effectiveTimestamp ? new Date(s.effectiveTimestamp).toLocaleString('en-IN') : '',
+                ...PROFILE_FIELDS.map(f => String(s[f.key] ?? '').replace(/"/g, '""'))
+            ]);
 
-            const csvContent = [headers.join(','), ...rows].join('\n');
+            const csvContent = [headers, ...rows]
+                .map(row => row.map(cell => `"${cell}"`).join(','))
+                .join('\n');
+
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `JNV_Varanasi_Magazine_Submissions.csv`;
+            a.download = `JNV_Varanasi_Magazine_Profiles.csv`;
             a.click();
         }
 
