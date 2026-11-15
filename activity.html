@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recent Activity | JNV Varanasi Magazine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --card-hover: #26354d;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --accent-color: #c2a67f;
+            --border-color: #334155;
+            --success: #4ade80;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 50px 20px 35px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-style: italic;
+        }
+
+        .header p {
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        /* Stats Bar */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Controls Bar */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: white;
+            font-size: 0.95rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 11px 16px;
+            background: var(--card-bg);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn.active, .btn:hover {
+            background: var(--accent-color);
+            color: #000;
+            border-color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* Activity Feed */
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .activity-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .activity-card:hover {
+            background: var(--card-hover);
+        }
+
+        .activity-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .activity-title {
+            font-size: 1.05rem;
+        }
+
+        .activity-title strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .time-badge {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: #0f172a;
+            padding: 4px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+            border: 1px solid var(--border-color);
+        }
+
+        .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 3px 9px;
+            border-radius: 6px;
+            background: rgba(194, 166, 127, 0.15);
+            color: var(--accent-color);
+        }
+
+        /* Expandable Details */
+        .details-panel {
+            display: none;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-color);
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .activity-card.expanded .details-panel {
+            display: grid;
+        }
+
+        .detail-item {
+            background: #0f172a;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #1e293b;
+        }
+
+        .detail-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .detail-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            font-size: 0.92rem;
+            color: #e2e8f0;
+            word-break: break-word;
+        }
+
+        .pending-badge {
+            border-left-color: #64748b;
+            cursor: default;
+        }
+
+        .status-box {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .details-panel { grid-template-columns: 1fr; }
+            .activity-top { flex-direction: column; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>JNV Varanasi</h1>
+        <p>Live Submission Activity Feed</p>
+    </header>
+
+    <main class="container">
+        <!-- Stats Summary -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="submitted-count">0</div>
+                <div class="stat-label">Profiles Updated</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="pending-count">0</div>
+                <div class="stat-label">Pending</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-count">0</div>
+                <div class="stat-label">Total Students</div>
+            </div>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="controls">
+            <input type="text" id="search-box" class="search-input" placeholder="Search student name or house...">
+            <div class="btn-group">
+                <button class="btn active" id="tab-recent" onclick="setFilter('submitted')">Recent Updates</button>
+                <button class="btn" id="tab-pending" onclick="setFilter('pending')">Pending</button>
+                <button class="btn" onclick="loadActivity()">↻ Refresh</button>
+            </div>
+        </div>
+
+        <!-- Feed Container -->
+        <div id="feed-container" class="activity-list">
+            <div class="status-box">Loading recent activity from database...</div>
+        </div>
+    </main>
+
+    <script>
+        const SUPABASE_URL = "https://pzplzdgdlnjfwbklxbfd.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_N3pli21Nl9PtLXeFkiuizg_W5Aw5MpM";
+
+        const PROFILE_FIELDS = [
+            { key: 'roll_no', label: 'Roll Number' },
+            { key: 'house', label: 'House' },
+            { key: 'bio', label: 'Short Bio', full: true },
+            { key: 'hobbies', label: 'Hobbies' },
+            { key: 'interests', label: 'Interests' },
+            { key: 'favourite_subject', label: 'Favourite Subject' },
+            { key: 'favourite_book', label: 'Favourite Book' },
+            { key: 'favourite_movie', label: 'Favourite Movie' },
+            { key: 'achievements', label: 'Achievements & Creative Work', full: true },
+            { key: 'instagram', label: 'Instagram' },
+            { key: 'favourite_quote', label: 'Signature Quote', full: true },
+            { key: 'photo_url', label: 'Photo URL', full: true },
+            { key: 'favourite_song', label: 'Favourite Song' },
+            { key: 'hidden_talent', label: 'Hidden Talent' },
+            { key: 'navodaya_means', label: 'What Navodaya Means to Me', full: true },
+            { key: 'favourite_jnv_memory', label: 'Favourite JNV Memory', full: true },
+            { key: 'what_i_will_miss', label: 'What I Will Miss Most', full: true },
+            { key: 'how_jnv_changed_me', label: 'How JNV Changed Me', full: true },
+            { key: 'future_goal', label: 'Future Goal' },
+            { key: 'favourite_teacher', label: 'Favourite Teacher' },
+            { key: 'favourite_teacher_reason', label: 'Reason' },
+            { key: 'anything_else', label: 'Anything Else (Topic)' },
+            { key: 'anything_else_brief', label: 'Anything Else (Details)', full: true }
+        ];
+
+        let allStudents = [];
+        let currentFilter = 'submitted';
+
+        // Check how many fields a student has filled out
+        function getFilledFields(student) {
+            return PROFILE_FIELDS.filter(f => {
+                const val = student[f.key];
+                return val !== null && val !== undefined && String(val).trim() !== "";
+            });
+        }
+
+        // Convert timestamp into "5 mins ago" + readable date
+        function formatTimeAgo(dateString) {
+            if (!dateString) return "Recently updated";
+            const date = new Date(dateString);
+            const now = new Date();
+            const seconds = Math.floor((now - date) / 1000);
+
+            let relative = "";
+            if (seconds < 60) relative = "Just now";
+            else if (seconds < 3600) relative = `${Math.floor(seconds / 60)}m ago`;
+            else if (seconds < 86400) relative = `${Math.floor(seconds / 3600)}h ago`;
+            else relative = `${Math.floor(seconds / 86400)}d ago`;
+
+            const exact = date.toLocaleDateString('en-IN', {
+                day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'
+            });
+
+            return `${relative} • ${exact}`;
+        }
+
+        async function loadActivity() {
+            const container = document.getElementById('feed-container');
+            container.innerHTML = `<div class="status-box">Fetching latest submissions...</div>`;
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/student?select=*`, {
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(await response.text());
+                }
+
+                allStudents = await response.json();
+                renderFeed();
+
+            } catch (error) {
+                console.error("Error loading activity:", error);
+                container.innerHTML = `<div class="status-box" style="color:#f87171;">❌ Failed to load activity: ${error.message}</div>`;
+            }
+        }
+
+        function renderFeed() {
+            const container = document.getElementById('feed-container');
+            const searchQuery = document.getElementById('search-box').value.toLowerCase().trim();
+
+            // Separate submitted vs pending students
+            const submitted = [];
+            const pending = [];
+
+            allStudents.forEach(student => {
+                const filled = getFilledFields(student);
+                if (filled.length > 0 || student.updated_at) {
+                    submitted.push({ ...student, filledFields: filled });
+                } else {
+                    pending.push(student);
+                }
+            });
+
+            // Sort submitted in DESCENDING order (newest first)
+            submitted.sort((a, b) => {
+                const timeA = a.updated_at ? new Date(a.updated_at).getTime() : (a.created_at ? new Date(a.created_at).getTime() : 0);
+                const timeB = b.updated_at ? new Date(b.updated_at).getTime() : (b.created_at ? new Date(b.created_at).getTime() : 0);
+                return timeB - timeA;
+            });
+
+            // Update stats counters
+            document.getElementById('submitted-count').textContent = submitted.length;
+            document.getElementById('pending-count').textContent = pending.length;
+            document.getElementById('total-count').textContent = allStudents.length;
+
+            const listToShow = currentFilter === 'submitted' ? submitted : pending;
+
+            const filtered = listToShow.filter(s => {
+                const nameMatch = (s.name || "").toLowerCase().includes(searchQuery);
+                const houseMatch = (s.house || "").toLowerCase().includes(searchQuery);
+                return nameMatch || houseMatch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="status-box">No records found.</div>`;
+                return;
+            }
+
+            if (currentFilter === 'submitted') {
+                container.innerHTML = filtered.map(student => {
+                    const timestamp = student.updated_at || student.created_at;
+                    const detailsHtml = student.filledFields.map(f => `
+                        <div class="detail-item ${f.full ? 'full-width' : ''}">
+                            <div class="detail-label">${f.label}</div>
+                            <div class="detail-value">${escapeHtml(String(student[f.key]))}</div>
+                        </div>
+                    `).join('');
+
+                    return `
+                        <div class="activity-card" onclick="this.classList.toggle('expanded')">
+                            <div class="activity-top">
+                                <div class="activity-title">
+                                    ✨ <strong>${escapeHtml(student.name)}</strong> updated their profile
+                                </div>
+                                <span class="time-badge">${formatTimeAgo(timestamp)}</span>
+                            </div>
+                            <div class="meta-tags">
+                                ${student.house ? `<span class="tag">🏠 ${escapeHtml(student.house)}</span>` : ''}
+                                ${student.roll_no ? `<span class="tag">#️⃣ Roll No: ${escapeHtml(String(student.roll_no))}</span>` : ''}
+                                <span class="tag">📝 ${student.filledFields.length} fields filled • Click to view</span>
+                            </div>
+                            <div class="details-panel">
+                                ${detailsHtml}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                container.innerHTML = filtered.map(student => `
+                    <div class="activity-card pending-badge">
+                        <div class="activity-top">
+                            <div class="activity-title">
+                                ⏳ <strong>${escapeHtml(student.name)}</strong> hasn't submitted yet
+                            </div>
+                            <span class="time-badge">Pending</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function setFilter(filterType) {
+            currentFilter = filterType;
+            document.getElementById('tab-recent').classList.toggle('active', filterType === 'submitted');
+            document.getElementById('tab-pending').classList.toggle('active', filterType === 'pending');
+            renderFeed();
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>"']/g, m => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[m]));
+        }
+
+        document.getElementById('search-box').addEventListener('input', renderFeed);
+
+        // Initial load
+        loadActivity();
+    </script>
+</body>
+</html>
