@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activity & History Log | JNV Varanasi Magazine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <title>Editorial Dispatch & Archive | JNV Varanasi Magazine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --card-hover: #26354d;
-            --text-main: #ffffff;
-            --text-muted: #94a3b8;
-            --accent-color: #c2a67f;
-            --border-color: #334155;
-            --history-accent: #38bdf8;
+            --paper-bg: #f3ede0;
+            --paper-card: #fbf8f1;
+            --paper-dark: #e6decb;
+            --ink-black: #1c1917;
+            --ink-faded: #57534e;
+            --ink-light: #78716c;
+            --stamp-red: #991b1b;
+            --stamp-red-bg: rgba(153, 27, 27, 0.08);
+            --stamp-green: #166534;
+            --stamp-green-bg: rgba(22, 101, 52, 0.08);
+            --stamp-blue: #1e3a8a;
+            --stamp-blue-bg: rgba(30, 58, 138, 0.08);
+            --border-ink: #292524;
         }
 
         * {
@@ -24,102 +29,230 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: 'Courier Prime', Courier, monospace;
+            background-color: var(--paper-bg);
+            background-image: 
+                radial-gradient(rgba(28, 25, 23, 0.04) 1px, transparent 0),
+                radial-gradient(rgba(28, 25, 23, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            color: var(--ink-black);
             line-height: 1.6;
-            padding-bottom: 80px;
+            padding-bottom: 90px;
         }
 
-        .header {
-            text-align: center;
-            padding: 50px 20px 35px;
-            border-bottom: 2px solid var(--accent-color);
-        }
-
-        .header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            font-style: italic;
-        }
-
-        .header p {
-            color: var(--accent-color);
+        /* Top Archival Teleprinter Ribbon */
+        .teleprinter-bar {
+            background: var(--ink-black);
+            color: var(--paper-bg);
+            font-size: 0.78rem;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.85rem;
-            margin-top: 8px;
+            border-bottom: 3px double var(--paper-bg);
         }
 
-        .container {
-            max-width: 850px;
-            margin: 35px auto;
+        .live-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #dc2626;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: blink 1.2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        /* Newspaper Gazette Masthead */
+        .masthead {
+            max-width: 920px;
+            margin: 30px auto 0;
             padding: 0 20px;
         }
 
-        /* Stats Bar */
+        .masthead-box {
+            background: var(--paper-card);
+            border: 2px solid var(--border-ink);
+            box-shadow: 5px 5px 0px var(--border-ink);
+            padding: 35px 25px 28px;
+            text-align: center;
+            position: relative;
+        }
+
+        .masthead-box::before {
+            content: "";
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px dashed var(--ink-light);
+            pointer-events: none;
+        }
+
+        .rubber-stamp {
+            display: inline-block;
+            font-family: 'Special Elite', monospace;
+            color: var(--stamp-red);
+            border: 2px solid var(--stamp-red);
+            padding: 4px 12px;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transform: rotate(-2deg);
+            margin-bottom: 12px;
+            background: var(--stamp-red-bg);
+        }
+
+        .masthead h1 {
+            font-family: 'Special Elite', monospace;
+            font-size: 2.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--ink-black);
+            margin: 5px 0;
+        }
+
+        .masthead-sub {
+            font-size: 0.9rem;
+            color: var(--ink-faded);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-top: 1px solid var(--border-ink);
+            border-bottom: 1px solid var(--border-ink);
+            padding: 6px 0;
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .container {
+            max-width: 920px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Typewriter Progress Meter */
+        .progress-ledger {
+            background: var(--paper-card);
+            border: 2px solid var(--border-ink);
+            box-shadow: 4px 4px 0px var(--border-ink);
+            padding: 18px 22px;
+            margin-bottom: 25px;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 18px;
+            background: var(--paper-dark);
+            border: 1px solid var(--border-ink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--ink-black),
+                var(--ink-black) 6px,
+                #44403c 6px,
+                #44403c 12px
+            );
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Stats Cards (Library Index Cards) */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
         }
 
         .stat-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+            background: var(--paper-card);
+            border: 2px solid var(--border-ink);
+            box-shadow: 4px 4px 0px var(--border-ink);
             padding: 16px;
-            text-align: center;
+            position: relative;
+        }
+
+        .stat-ref {
+            font-size: 0.68rem;
+            color: var(--ink-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 4px;
         }
 
         .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.9rem;
-            color: var(--accent-color);
-            font-weight: 700;
+            font-family: 'Special Elite', monospace;
+            font-size: 2.1rem;
+            color: var(--ink-black);
+            line-height: 1.1;
         }
 
         .stat-label {
-            font-size: 0.72rem;
+            font-size: 0.76rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
+            font-weight: 700;
+            color: var(--ink-faded);
             margin-top: 4px;
         }
 
-        /* Controls Bar */
+        /* Sticky Typewriter Controls Bar */
         .controls {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             position: sticky;
             top: 10px;
-            z-index: 10;
-            background: rgba(15, 23, 42, 0.92);
-            backdrop-filter: blur(8px);
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
+            z-index: 20;
+            background: var(--paper-card);
+            padding: 14px;
+            border: 2px solid var(--border-ink);
+            box-shadow: 4px 4px 0px var(--border-ink);
         }
 
         .search-input {
             flex: 1;
-            min-width: 200px;
-            padding: 11px 15px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: white;
-            font-size: 0.95rem;
+            min-width: 210px;
+            padding: 10px 14px;
+            background: var(--paper-bg);
+            border: 1px solid var(--border-ink);
+            color: var(--ink-black);
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.92rem;
         }
 
         .search-input:focus {
-            outline: none;
-            border-color: var(--accent-color);
+            outline: 2px solid var(--ink-black);
+            background: #fff;
         }
 
         .btn-group {
@@ -129,84 +262,111 @@
         }
 
         .btn {
-            padding: 10px 15px;
-            background: var(--card-bg);
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 500;
+            padding: 9px 14px;
+            background: var(--paper-bg);
+            color: var(--ink-black);
+            border: 1px solid var(--border-ink);
+            box-shadow: 2px 2px 0px var(--border-ink);
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.2s;
             text-decoration: none;
+            transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
         }
 
-        .btn.active, .btn:hover {
-            background: var(--accent-color);
-            color: #000;
-            border-color: var(--accent-color);
-            font-weight: 600;
+        .btn:hover {
+            background: var(--paper-dark);
+            transform: translate(-1px, -1px);
+            box-shadow: 3px 3px 0px var(--border-ink);
         }
 
-        /* Section Dividers */
+        .btn:active {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px var(--border-ink);
+        }
+
+        .btn.primary {
+            background: var(--ink-black);
+            color: var(--paper-card);
+        }
+
+        .btn.primary:hover {
+            background: #333;
+        }
+
+        .btn.stamp-btn {
+            color: var(--stamp-red);
+            border-color: var(--stamp-red);
+            box-shadow: 2px 2px 0px var(--stamp-red);
+        }
+
+        /* Section Headings */
         .section-divider {
-            margin: 45px 0 20px;
+            margin: 50px 0 20px;
             padding-bottom: 12px;
-            border-bottom: 1px solid var(--accent-color);
+            border-bottom: 2px solid var(--border-ink);
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
         .section-divider h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--accent-color);
-            font-style: italic;
+            font-family: 'Special Elite', monospace;
+            font-size: 1.65rem;
+            color: var(--ink-black);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .section-divider p {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-top: 4px;
+            font-size: 0.82rem;
+            color: var(--ink-faded);
+            margin-top: 3px;
         }
 
         .order-pill {
+            font-family: 'Special Elite', monospace;
             font-size: 0.75rem;
-            background: rgba(194, 166, 127, 0.15);
-            color: var(--accent-color);
+            background: var(--stamp-red-bg);
+            color: var(--stamp-red);
             padding: 5px 12px;
-            border-radius: 20px;
-            border: 1px solid rgba(194, 166, 127, 0.4);
+            border: 1px solid var(--stamp-red);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Activity Feed Cards */
+        /* Dossier Activity Cards */
         .activity-list {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 16px;
         }
 
         .activity-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-left: 4px solid var(--accent-color);
-            border-radius: 10px;
-            padding: 18px 20px;
+            background: var(--paper-card);
+            border: 2px solid var(--border-ink);
+            box-shadow: 4px 4px 0px var(--border-ink);
+            padding: 18px 22px;
             cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .activity-card.history-card {
-            border-left-color: var(--history-accent);
+            transition: transform 0.12s, box-shadow 0.12s;
+            position: relative;
         }
 
         .activity-card:hover {
-            background: var(--card-hover);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--border-ink);
+        }
+
+        .activity-card.history-card {
+            border-left: 6px solid var(--stamp-blue);
+        }
+
+        .activity-card.recent-card {
+            border-left: 6px solid var(--stamp-green);
         }
 
         .activity-top {
@@ -219,51 +379,55 @@
 
         .activity-title {
             font-size: 1.05rem;
+            color: var(--ink-black);
         }
 
         .activity-title strong {
-            color: var(--accent-color);
-            font-weight: 600;
+            font-family: 'Special Elite', monospace;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+            text-decoration: underline;
+            text-underline-offset: 3px;
         }
 
-        .history-card .activity-title strong {
-            color: var(--history-accent);
-        }
-
-        .rank-badge {
+        .file-badge {
             display: inline-block;
-            background: #0f172a;
-            color: var(--accent-color);
-            font-size: 0.75rem;
-            font-weight: 600;
+            background: var(--ink-black);
+            color: var(--paper-card);
+            font-size: 0.72rem;
+            font-weight: 700;
             padding: 2px 8px;
-            border-radius: 6px;
-            margin-right: 6px;
-            border: 1px solid var(--border-color);
+            margin-right: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Date & Time Box */
+        /* Date & Time Typewriter Stamps */
         .datetime-box {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             align-items: center;
         }
 
         .dt-pill {
-            font-size: 0.78rem;
-            color: #e2e8f0;
-            background: #0f172a;
-            padding: 4px 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
+            font-size: 0.76rem;
+            color: var(--ink-black);
+            background: var(--paper-bg);
+            padding: 3px 9px;
+            border: 1px solid var(--border-ink);
             white-space: nowrap;
+            font-weight: 700;
         }
 
         .dt-relative {
-            font-size: 0.75rem;
-            color: var(--accent-color);
-            font-weight: 600;
+            font-family: 'Special Elite', monospace;
+            font-size: 0.76rem;
+            color: var(--stamp-red);
+            background: var(--stamp-red-bg);
+            border: 1px solid var(--stamp-red);
+            padding: 2px 8px;
+            text-transform: uppercase;
         }
 
         .meta-tags {
@@ -271,27 +435,37 @@
             flex-wrap: wrap;
             gap: 8px;
             margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--ink-light);
         }
 
         .tag {
             font-size: 0.75rem;
-            padding: 3px 10px;
-            border-radius: 6px;
-            background: rgba(194, 166, 127, 0.14);
-            color: var(--accent-color);
+            padding: 2px 9px;
+            border: 1px solid var(--border-ink);
+            background: var(--paper-bg);
+            color: var(--ink-black);
+            font-weight: 700;
+        }
+
+        .tag.green {
+            color: var(--stamp-green);
+            border-color: var(--stamp-green);
+            background: var(--stamp-green-bg);
         }
 
         .tag.blue {
-            background: rgba(56, 189, 248, 0.14);
-            color: var(--history-accent);
+            color: var(--stamp-blue);
+            border-color: var(--stamp-blue);
+            background: var(--stamp-blue-bg);
         }
 
-        /* Expandable Details */
+        /* Expandable Typed Dossier Details */
         .details-panel {
             display: none;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border-color);
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 2px solid var(--border-ink);
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
@@ -301,10 +475,9 @@
         }
 
         .detail-item {
-            background: #0f172a;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #1e293b;
+            background: var(--paper-bg);
+            padding: 12px 14px;
+            border: 1px solid var(--border-ink);
         }
 
         .detail-item.full-width {
@@ -312,118 +485,219 @@
         }
 
         .detail-label {
-            font-size: 0.7rem;
+            font-family: 'Special Elite', monospace;
+            font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--accent-color);
+            color: var(--stamp-red);
             margin-bottom: 4px;
         }
 
         .detail-value {
-            font-size: 0.9rem;
-            color: #e2e8f0;
+            font-size: 0.92rem;
+            color: var(--ink-black);
             word-break: break-word;
+            white-space: pre-wrap;
+        }
+
+        /* Pending Roll-Call Grid */
+        .pending-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .pending-slip {
+            background: var(--paper-card);
+            border: 1px solid var(--border-ink);
+            border-left: 5px solid var(--stamp-red);
+            box-shadow: 3px 3px 0px var(--border-ink);
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pending-name {
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+
+        .pending-stamp {
+            font-family: 'Special Elite', monospace;
+            font-size: 0.68rem;
+            color: var(--stamp-red);
+            border: 1px solid var(--stamp-red);
+            padding: 2px 6px;
+            text-transform: uppercase;
+            background: var(--stamp-red-bg);
+            white-space: nowrap;
         }
 
         .status-box {
             text-align: center;
             padding: 35px 20px;
-            background: var(--card-bg);
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
+            background: var(--paper-card);
+            border: 2px dashed var(--border-ink);
+            color: var(--ink-faded);
+            font-weight: 700;
         }
 
-        .pending-card {
-            border-left-color: #64748b;
-            cursor: default;
+        .footer-colophon {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 25px;
+            border-top: 3px double var(--border-ink);
+            font-size: 0.8rem;
+            color: var(--ink-faded);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
 
-        @media (max-width: 650px) {
+        @media (max-width: 680px) {
             .stats-grid { grid-template-columns: 1fr 1fr; }
             .details-panel { grid-template-columns: 1fr; }
-            .activity-top { flex-direction: column; gap: 8px; }
+            .masthead h1 { font-size: 2rem; }
+            .masthead-sub { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <h1>JNV Varanasi</h1>
-        <p>Live Submission Activity & Full History Log</p>
+    <!-- Top Teleprinter Ribbon -->
+    <div class="teleprinter-bar">
+        <div><span class="live-dot"></span>TELEPRINTER FEED // JNV VARANASI EDITORIAL ROOM</div>
+        <div id="live-clock">SYNCHRONIZING ARCHIVE CLOCK...</div>
+    </div>
+
+    <!-- Gazette Masthead -->
+    <header class="masthead">
+        <div class="masthead-box">
+            <div class="rubber-stamp">ARCHIVE VERIFIED • ISSUE NO. 01</div>
+            <h1>The Navodaya Chronicle</h1>
+            <p style="font-style: italic; color: var(--ink-faded);">Student Profile Submission Ledger & Activity Log</p>
+            <div class="masthead-sub">
+                <span>LOCATION: GAJOKHAR, VARANASI</span>
+                <span>SORT ORDER: DESCENDING (NEWEST FIRST)</span>
+                <span id="last-sync-text">STATUS: READY</span>
+            </div>
+        </div>
     </header>
 
     <main class="container">
-        <!-- Stats Summary -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number" id="submitted-count">0</div>
-                <div class="stat-label">Students Updated</div>
+        <!-- Typewriter Progress Meter -->
+        <div class="progress-ledger">
+            <div class="progress-header">
+                <span>MAGAZINE COMPLETION PROGRESS</span>
+                <span id="progress-text">0 / 65 FILED (0%)</span>
             </div>
-            <div class="stat-card">
-                <div class="stat-number" id="history-count">0</div>
-                <div class="stat-label">Total History Logs</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="pending-count">0</div>
-                <div class="stat-label">Pending Students</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="total-count">0</div>
-                <div class="stat-label">Total Students</div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-bar"></div>
             </div>
         </div>
 
-        <!-- Sticky Search & Quick Jump Bar -->
+        <!-- Index Card Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-ref">INDEX // REF-01</span>
+                <div class="stat-number" id="submitted-count">0</div>
+                <div class="stat-label">Profiles Filed</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-ref">INDEX // REF-02</span>
+                <div class="stat-number" id="history-count">0</div>
+                <div class="stat-label">History Dispatches</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-ref">INDEX // REF-03</span>
+                <div class="stat-number" id="pending-count">0</div>
+                <div class="stat-label">Awaiting Filing</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-ref">INDEX // REF-04</span>
+                <div class="stat-number" id="total-count">0</div>
+                <div class="stat-label">Total Roster</div>
+            </div>
+        </div>
+
+        <!-- Sticky Search & Navigation Bar -->
         <div class="controls">
-            <input type="text" id="search-box" class="search-input" placeholder="Search by student name or house...">
+            <input type="text" id="search-box" class="search-input" placeholder="Type student name or house to filter...">
             <div class="btn-group">
-                <a href="#section-recent" class="btn">1. Recent Profiles</a>
-                <a href="#section-history" class="btn">2. Full History Log</a>
-                <a href="#section-pending" class="btn">3. Pending</a>
-                <button class="btn active" onclick="loadAllData()">↻ Refresh Now</button>
+                <a href="#section-recent" class="btn">1. Filed Profiles</a>
+                <a href="#section-history" class="btn">2. History Log</a>
+                <a href="#section-pending" class="btn stamp-btn">3. Pending List</a>
+                <button class="btn" onclick="exportCSV()">⬇ Export CSV</button>
+                <button class="btn primary" onclick="loadAllData()">↻ Fetch Latest</button>
             </div>
         </div>
 
         <!-- SECTION 1: RECENT PROFILE UPDATES (DESCENDING) -->
         <div id="section-recent" class="section-divider">
             <div>
-                <h2>1. Recent Profile Updates</h2>
-                <p>Most recently updated student profiles appear at the top</p>
+                <h2>I. Recently Filed Profiles</h2>
+                <p>Click any dossier card to unfold and inspect the student's full submission</p>
             </div>
-            <span class="order-pill">↓ Descending Order (Newest First)</span>
+            <span class="order-pill">↓ Newest Submission on Top</span>
         </div>
         <div id="recent-container" class="activity-list">
-            <div class="status-box">Loading recent profile updates...</div>
+            <div class="status-box"> typing... fetching latest dossiers from database...</div>
         </div>
 
         <!-- SECTION 2: FULL SUBMISSION HISTORY LOG (MULTIPLE UPDATES) -->
         <div id="section-history" class="section-divider">
             <div>
-                <h2>2. Full Submission History Log</h2>
-                <p>Every update made by students (including multiple updates by the same student)</p>
+                <h2>II. Full Submission History Log</h2>
+                <p>Chronological wire log of every single update (including repeat edits by the same student)</p>
             </div>
-            <span class="order-pill">↓ Descending Order (Newest First)</span>
+            <span class="order-pill">↓ Exact Date & Time (Descending)</span>
         </div>
         <div id="history-container" class="activity-list">
-            <div class="status-box">Loading full submission history log...</div>
+            <div class="status-box"> typing... reading chronological dispatch logs...</div>
         </div>
 
         <!-- SECTION 3: PENDING STUDENTS -->
         <div id="section-pending" class="section-divider">
             <div>
-                <h2>3. Pending Students</h2>
-                <p>Students who have not submitted their profile yet</p>
+                <h2>III. Pending Roll-Call (Not Submitted Yet)</h2>
+                <p>Students from the official class roster who have not filled out their magazine profile yet</p>
             </div>
+            <button class="btn stamp-btn" id="copy-pending-btn" onclick="copyPendingWhatsApp()">📋 Copy Pending List for WhatsApp</button>
         </div>
-        <div id="pending-container" class="activity-list">
-            <div class="status-box">Loading pending list...</div>
+        <div id="pending-container" class="pending-grid">
+            <div class="status-box" style="grid-column: 1 / -1;"> typing... checking class roster...</div>
         </div>
+
+        <footer class="footer-colophon">
+            PRINTED BY JNV VARANASI ARCHIVE PRESS • ALL SUBMISSIONS TIMESTAMPED IN IST
+        </footer>
     </main>
 
     <script>
         const SUPABASE_URL = "https://pzplzdgdlnjfwbklxbfd.supabase.co";
         const SUPABASE_KEY = "sb_publishable_N3pli21Nl9PtLXeFkiuizg_W5Aw5MpM";
+
+        // Complete official 65-student roster from index.html
+        const MASTER_ROSTER = [
+            "Abhijeet Yadav", "Aditya Patel", "Aditya Singh Kushwaha", "Ajeet Kumar",
+            "Akhilesh Kumar Verma", "Alok Kumar", "Amrita Tiwari", "Anamika",
+            "Anil Yadav", "Ankush Rana", "Ankush Sahani", "Arav Chaudhary",
+            "Arpit Yadav", "Aryan Kapoor", "Ashish Gautam", "Atulya Pratap",
+            "Bibhu Singh", "Deep Govind", "Dhruv Ji Upadhyay", "Divya Rani",
+            "Farhan", "Harsh Jaiswal", "Harshit Tiwari", "Himanshu Kumar",
+            "Jahnvi Singh", "Jasveer Singh", "Kapil Gangwar", "Khushi Kanojiya",
+            "Khushi Patel", "Krishna Parwal", "Kumari Gauri", "Lakshay Pratap Singh",
+            "Lakshman Arya", "Manali", "Pankaj Maurya", "Pavan Kumar",
+            "Piyush Vardhan", "Pratyush", "Priyanshu", "Riya Rai",
+            "Samridhi Sharma", "Saniya Bi", "Saurabh Kumar", "Shikha Pal",
+            "Shivam", "Shivam Kumar", "Shobhit Kumar", "Shruti Agrahari",
+            "Shudansu Kumar", "Sourabh Roshan", "Sumit Kumar Singh", "Suraj Pratap Singh",
+            "Sushant Kumar", "Swaroop Kumar", "Tanaisha Singh", "Tanish Kumar",
+            "Tejash Shukla", "Tristi Kumari", "Tulsi Kumari", "Vaibhav Verma",
+            "Vaivhav Raj", "Ved Prakash", "Vikas", "Vikram Singh Rana",
+            "Vipin Kumar Varun", "Vivek Kumar"
+        ];
 
         const PROFILE_FIELDS = [
             { key: 'roll_no', label: 'Roll Number' },
@@ -456,28 +730,50 @@
 
         let allStudents = [];
         let historyLogs = [];
-        let historyTableExists = true;
+        let currentPendingList = [];
+        let currentSubmittedList = [];
 
-        function getFilledFields(student) {
-            return PROFILE_FIELDS.filter(f => {
-                const val = student[f.key];
-                return val !== null && val !== undefined && String(val).trim() !== "";
-            });
+        // Live Typewriter Clock
+        function updateClock() {
+            const now = new Date();
+            const d = now.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+            const t = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+            document.getElementById('live-clock').textContent = `${d} • ${t} IST`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Strict check for genuinely filled fields
+        function is meaningfulValue(val) {
+            if (val === null || val === undefined) return false;
+            const str = String(val).trim();
+            if (str === "" || str.toLowerCase() === "null" || str.toLowerCase() === "undefined" || str === "0") return false;
+            return true;
         }
 
-        // Format exact Date, exact Time (with seconds), and relative time
+        function getFilledFields(student) {
+            return PROFILE_FIELDS.filter(f => isMeaningfulValue(student[f.key]));
+        }
+
+        function isMeaningfulValue(val) {
+            if (val === null || val === undefined) return false;
+            const str = String(val).trim();
+            return str !== "" && str.toLowerCase() !== "null" && str.toLowerCase() !== "undefined";
+        }
+
+        // Format exact Date, exact Time (with seconds), and relative badge
         function formatDateTimeBadge(dateString) {
             if (!dateString) {
                 return `
                     <div class="datetime-box">
-                        <span class="dt-pill">📅 Updated prior to time-tracking</span>
+                        <span class="dt-pill">DATE: ARCHIVE ENTRY</span>
                     </div>
                 `;
             }
 
             const date = new Date(dateString);
             if (isNaN(date.getTime())) {
-                return `<div class="datetime-box"><span class="dt-pill">📅 Timestamp unavailable</span></div>`;
+                return `<div class="datetime-box"><span class="dt-pill">DATE: UNKNOWN</span></div>`;
             }
 
             const now = new Date();
@@ -493,30 +789,29 @@
                 day: '2-digit',
                 month: 'short',
                 year: 'numeric'
-            });
+            }).toUpperCase();
 
             const formattedTime = date.toLocaleTimeString('en-IN', {
                 hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit',
                 hour12: true
-            });
+            }).toUpperCase();
 
             return `
                 <div class="datetime-box">
                     <span class="dt-relative">${relative}</span>
-                    <span class="dt-pill">📅 ${formattedDate}</span>
-                    <span class="dt-pill">🕒 ${formattedTime}</span>
+                    <span class="dt-pill">DATE: ${formattedDate}</span>
+                    <span class="dt-pill">TIME: ${formattedTime}</span>
                 </div>
             `;
         }
 
         async function loadAllData() {
-            document.getElementById('recent-container').innerHTML = `<div class="status-box">Fetching latest submissions...</div>`;
-            document.getElementById('history-container').innerHTML = `<div class="status-box">Fetching full history log...</div>`;
+            document.getElementById('last-sync-text').textContent = "STATUS: FETCHING WIRE...";
 
             try {
-                // 1. Fetch students
+                // 1. Fetch students from Supabase
                 const studentRes = await fetch(`${SUPABASE_URL}/rest/v1/student?select=*`, {
                     headers: {
                         'apikey': SUPABASE_KEY,
@@ -527,10 +822,10 @@
                 if (!studentRes.ok) throw new Error(await studentRes.text());
                 const rawStudents = await studentRes.json();
 
-                // Reverse raw PostgreSQL heap order so newest updates are first even if updated_at is null
+                // Reverse raw PostgreSQL heap order so newest updates are at index 0
                 allStudents = rawStudents.reverse();
 
-                // 2. Fetch full history logs ordered newest first
+                // 2. Fetch history logs ordered newest first
                 const historyRes = await fetch(`${SUPABASE_URL}/rest/v1/activity_logs?select=*&order=updated_at.desc`, {
                     headers: {
                         'apikey': SUPABASE_KEY,
@@ -540,29 +835,30 @@
 
                 if (historyRes.ok) {
                     historyLogs = await historyRes.json();
-                    historyTableExists = true;
                 } else {
                     historyLogs = [];
-                    historyTableExists = false;
                 }
 
                 renderAllSections();
+                const syncTime = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                document.getElementById('last-sync-text').textContent = `LAST SYNC: ${syncTime}`;
 
             } catch (error) {
                 console.error("Error loading data:", error);
                 document.getElementById('recent-container').innerHTML =
-                    `<div class="status-box" style="color:#f87171;">❌ Error loading data: ${error.message}</div>`;
+                    `<div class="status-box" style="color:var(--stamp-red);">ERROR READING ARCHIVE: ${escapeHtml(error.message)}</div>`;
             }
         }
 
         function renderAllSections() {
             const query = document.getElementById('search-box').value.toLowerCase().trim();
 
-            // Count how many times each student appears in historyLogs
+            // Count updates per student in historyLogs
             const updateCounts = {};
             const latestLogTimeByStudent = {};
             historyLogs.forEach(log => {
-                const name = log.student_name;
+                const name = (log.student_name || "").trim();
+                if (!name) return;
                 updateCounts[name] = (updateCounts[name] || 0) + 1;
                 if (!latestLogTimeByStudent[name]) {
                     latestLogTimeByStudent[name] = log.updated_at;
@@ -571,72 +867,122 @@
 
             const submitted = [];
             const pending = [];
+            const seenNames = new Set();
 
+            // Evaluate students returned from Supabase
             allStudents.forEach((student, index) => {
-                const filled = getFilledFields(student);
-                const effectiveTimestamp = student.updated_at || latestLogTimeByStudent[student.name] || null;
+                const cleanName = (student.name || "").trim();
+                if (!cleanName) return;
+                seenNames.add(cleanName.toLowerCase());
 
-                if (filled.length > 0 || effectiveTimestamp) {
+                const filled = getFilledFields(student);
+                const effectiveTimestamp = latestLogTimeByStudent[cleanName] || student.updated_at || student.created_at || null;
+
+                // FIXED BUG: A student is ONLY marked as Submitted if they have filled > 0 profile fields!
+                if (filled.length > 0) {
                     submitted.push({
                         ...student,
+                        name: cleanName,
                         filledFields: filled,
                         effectiveTimestamp,
-                        reverseHeapOrder: index // Preserves reversed PostgreSQL update order as tie-breaker
+                        reverseHeapOrder: index
                     });
                 } else {
-                    pending.push(student);
+                    pending.push({ name: cleanName, status: 'AWAITING SUBMISSION' });
                 }
             });
 
-            // Sort submitted strictly in DESCENDING order (most recent at the top)
+            // Also check MASTER_ROSTER so any student missing from the DB table still shows in Pending
+            MASTER_ROSTER.forEach(rosterName => {
+                if (!seenNames.has(rosterName.toLowerCase())) {
+                    pending.push({ name: rosterName, status: 'AWAITING SUBMISSION' });
+                }
+            });
+
+            // Sort Pending alphabetically for easy roll-call reading
+            pending.sort((a, b) => a.name.localeCompare(b.name));
+
+            // Sort Submitted strictly in DESCENDING order (most recent at the top)
             submitted.sort((a, b) => {
                 const timeA = a.effectiveTimestamp ? new Date(a.effectiveTimestamp).getTime() : 0;
                 const timeB = b.effectiveTimestamp ? new Date(b.effectiveTimestamp).getTime() : 0;
                 if (timeB !== timeA) {
-                    return timeB - timeA; // Newest timestamp first
+                    return timeB - timeA;
                 }
-                return a.reverseHeapOrder - b.reverseHeapOrder; // Newest heap update first
+                return a.reverseHeapOrder - b.reverseHeapOrder;
             });
 
-            // Update Top Stats
+            currentPendingList = pending;
+            currentSubmittedList = submitted;
+
+            // Synthesize fallback history entries if activity_logs is empty or missing some submitted students
+            let combinedHistory = [...historyLogs];
+            const loggedNames = new Set(historyLogs.map(l => (l.student_name || "").toLowerCase()));
+            submitted.forEach(s => {
+                if (!loggedNames.has(s.name.toLowerCase())) {
+                    const snap = {};
+                    s.filledFields.forEach(f => snap[f.key] = s[f.key]);
+                    combinedHistory.push({
+                        student_name: s.name,
+                        house: s.house,
+                        roll_no: s.roll_no,
+                        changed_fields: snap,
+                        updated_at: s.effectiveTimestamp
+                    });
+                }
+            });
+
+            combinedHistory.sort((a, b) => {
+                const tA = a.updated_at ? new Date(a.updated_at).getTime() : 0;
+                const tB = b.updated_at ? new Date(b.updated_at).getTime() : 0;
+                return tB - tA;
+            });
+
+            // Update Stats & Progress Bar
+            const totalRosterCount = submitted.length + pending.length;
+            const pct = totalRosterCount > 0 ? Math.round((submitted.length / totalRosterCount) * 100) : 0;
+
             document.getElementById('submitted-count').textContent = submitted.length;
-            document.getElementById('history-count').textContent = historyLogs.length || submitted.length;
+            document.getElementById('history-count').textContent = combinedHistory.length;
             document.getElementById('pending-count').textContent = pending.length;
-            document.getElementById('total-count').textContent = allStudents.length;
+            document.getElementById('total-count').textContent = totalRosterCount;
+            document.getElementById('progress-text').textContent = `${submitted.length} / ${totalRosterCount} FILED (${pct}%)`;
+            document.getElementById('progress-bar').style.width = `${pct}%`;
 
             // --- RENDER SECTION 1: RECENT PROFILE UPDATES ---
             const filteredSubmitted = submitted.filter(s =>
-                (s.name || "").toLowerCase().includes(query) ||
+                s.name.toLowerCase().includes(query) ||
                 (s.house || "").toLowerCase().includes(query)
             );
 
             const recentContainer = document.getElementById('recent-container');
             if (filteredSubmitted.length === 0) {
-                recentContainer.innerHTML = `<div class="status-box">No matching updated profiles found.</div>`;
+                recentContainer.innerHTML = `<div class="status-box">NO FILED PROFILES MATCH YOUR FILTER.</div>`;
             } else {
                 recentContainer.innerHTML = filteredSubmitted.map((student, idx) => {
                     const count = updateCounts[student.name] || 1;
                     const detailsHtml = student.filledFields.map(f => `
                         <div class="detail-item ${f.full ? 'full-width' : ''}">
-                            <div class="detail-label">${f.label}</div>
+                            <div class="detail-label">${escapeHtml(f.label)}</div>
                             <div class="detail-value">${escapeHtml(String(student[f.key]))}</div>
                         </div>
                     `).join('');
 
                     return `
-                        <div class="activity-card" onclick="this.classList.toggle('expanded')">
+                        <div class="activity-card recent-card" onclick="this.classList.toggle('expanded')">
                             <div class="activity-top">
                                 <div class="activity-title">
-                                    <span class="rank-badge">#${idx + 1} Latest</span>
-                                    ✨ <strong>${escapeHtml(student.name)}</strong> updated their profile
+                                    <span class="file-badge">DOSSIER #${idx + 1}</span>
+                                    <strong>${escapeHtml(student.name)}</strong> updated their profile
                                 </div>
                                 ${formatDateTimeBadge(student.effectiveTimestamp)}
                             </div>
                             <div class="meta-tags">
-                                ${student.house ? `<span class="tag">🏠 ${escapeHtml(student.house)}</span>` : ''}
-                                ${student.roll_no ? `<span class="tag">#️⃣ Roll No: ${escapeHtml(String(student.roll_no))}</span>` : ''}
-                                <span class="tag">🔄 ${count} ${count > 1 ? 'Updates Recorded' : 'Update'}</span>
-                                <span class="tag">📝 ${student.filledFields.length} fields filled • Click to view</span>
+                                <span class="tag green">[ FILED ]</span>
+                                ${student.house ? `<span class="tag">HOUSE: ${escapeHtml(student.house.toUpperCase())}</span>` : ''}
+                                ${student.roll_no ? `<span class="tag">ROLL NO: ${escapeHtml(String(student.roll_no))}</span>` : ''}
+                                <span class="tag">REVISIONS: ${count}</span>
+                                <span class="tag">${student.filledFields.length} FIELDS RECORDED • [CLICK TO OPEN DOSSIER]</span>
                             </div>
                             <div class="details-panel">
                                 ${detailsHtml}
@@ -648,86 +994,113 @@
 
             // --- RENDER SECTION 2: FULL SUBMISSION HISTORY LOG ---
             const historyContainer = document.getElementById('history-container');
+            const filteredHistory = combinedHistory.filter(log =>
+                (log.student_name || "").toLowerCase().includes(query) ||
+                (log.house || "").toLowerCase().includes(query)
+            );
 
-            if (!historyTableExists) {
-                historyContainer.innerHTML = `
-                    <div class="status-box" style="border-color:#f59e0b; color:#fde68a;">
-                        ⚠️ <strong>History Log Table Not Enabled Yet:</strong><br>
-                        Please run the <strong>Step 1 SQL Script</strong> in your Supabase SQL Editor so Supabase records exact dates, times, and multiple updates per student.
-                    </div>
-                `;
+            if (filteredHistory.length === 0) {
+                historyContainer.innerHTML = `<div class="status-box">NO HISTORY DISPATCH LOGS FOUND.</div>`;
             } else {
-                // Sort history logs strictly newest first
-                const sortedHistory = [...historyLogs].sort((a, b) =>
-                    new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
-                );
+                historyContainer.innerHTML = filteredHistory.map((log, idx) => {
+                    const changedObj = log.changed_fields || {};
+                    const changedKeys = Object.keys(changedObj).filter(k => isMeaningfulValue(changedObj[k]));
 
-                const filteredHistory = sortedHistory.filter(log =>
-                    (log.student_name || "").toLowerCase().includes(query) ||
-                    (log.house || "").toLowerCase().includes(query)
-                );
-
-                if (filteredHistory.length === 0) {
-                    historyContainer.innerHTML = `<div class="status-box">No history log entries recorded yet. Every new profile submission will appear here with exact date & time.</div>`;
-                } else {
-                    historyContainer.innerHTML = filteredHistory.map((log, idx) => {
-                        const changedObj = log.changed_fields || {};
-                        const changedKeys = Object.keys(changedObj);
-
-                        const changesHtml = changedKeys.length > 0
-                            ? changedKeys.map(k => `
-                                <div class="detail-item">
-                                    <div class="detail-label">${escapeHtml(FIELD_LABELS[k] || k)} (Updated in this submission)</div>
-                                    <div class="detail-value">${escapeHtml(String(changedObj[k]))}</div>
-                                </div>
-                            `).join('')
-                            : `<div class="detail-item full-width"><div class="detail-value">Profile re-submitted without field changes.</div></div>`;
-
-                        return `
-                            <div class="activity-card history-card" onclick="this.classList.toggle('expanded')">
-                                <div class="activity-top">
-                                    <div class="activity-title">
-                                        <span class="rank-badge">Log #${filteredHistory.length - idx}</span>
-                                        🕒 <strong>${escapeHtml(log.student_name)}</strong> submitted an update
-                                    </div>
-                                    ${formatDateTimeBadge(log.updated_at)}
-                                </div>
-                                <div class="meta-tags">
-                                    ${log.house ? `<span class="tag blue">🏠 ${escapeHtml(log.house)}</span>` : ''}
-                                    ${log.roll_no ? `<span class="tag blue">#️⃣ Roll No: ${escapeHtml(String(log.roll_no))}</span>` : ''}
-                                    <span class="tag blue">✏️ Modified ${changedKeys.length} field(s) in this submission • Click to inspect</span>
-                                </div>
-                                <div class="details-panel">
-                                    ${changesHtml}
-                                </div>
+                    const changesHtml = changedKeys.length > 0
+                        ? changedKeys.map(k => `
+                            <div class="detail-item">
+                                <div class="detail-label">${escapeHtml(FIELD_LABELS[k] || k)} (FILED IN THIS REVISION)</div>
+                                <div class="detail-value">${escapeHtml(String(changedObj[k]))}</div>
                             </div>
-                        `;
-                    }).join('');
-                }
+                        `).join('')
+                        : `<div class="detail-item full-width"><div class="detail-value">Profile re-saved without changes.</div></div>`;
+
+                    return `
+                        <div class="activity-card history-card" onclick="this.classList.toggle('expanded')">
+                            <div class="activity-top">
+                                <div class="activity-title">
+                                    <span class="file-badge">LOG #${filteredHistory.length - idx}</span>
+                                    <strong>${escapeHtml(log.student_name)}</strong> transmitted a profile update
+                                </div>
+                                ${formatDateTimeBadge(log.updated_at)}
+                            </div>
+                            <div class="meta-tags">
+                                <span class="tag blue">[ WIRE LOG ]</span>
+                                ${log.house ? `<span class="tag">HOUSE: ${escapeHtml(log.house.toUpperCase())}</span>` : ''}
+                                ${log.roll_no ? `<span class="tag">ROLL NO: ${escapeHtml(String(log.roll_no))}</span>` : ''}
+                                <span class="tag">${changedKeys.length} FIELD(S) UPDATED • [CLICK TO INSPECT REVISION]</span>
+                            </div>
+                            <div class="details-panel">
+                                ${changesHtml}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
             }
 
             // --- RENDER SECTION 3: PENDING STUDENTS ---
             const pendingContainer = document.getElementById('pending-container');
             const filteredPending = pending.filter(s =>
-                (s.name || "").toLowerCase().includes(query)
+                s.name.toLowerCase().includes(query)
             );
 
             if (filteredPending.length === 0) {
-                pendingContainer.innerHTML = `<div class="status-box">No pending students match your search.</div>`;
+                pendingContainer.innerHTML = `<div class="status-box" style="grid-column: 1 / -1;">ALL MATCHING STUDENTS HAVE FILED THEIR PROFILES!</div>`;
             } else {
-                pendingContainer.innerHTML = filteredPending.map(student => `
-                    <div class="activity-card pending-card">
-                        <div class="activity-top">
-                            <div class="activity-title">
-                                ⏳ <strong>${escapeHtml(student.name)}</strong> has not submitted their profile yet
-                            </div>
-                            <div class="datetime-box">
-                                <span class="dt-pill">Pending Submission</span>
-                            </div>
-                        </div>
+                pendingContainer.innerHTML = filteredPending.map((student, idx) => `
+                    <div class="pending-slip">
+                        <div class="pending-name">${idx + 1}. ${escapeHtml(student.name)}</div>
+                        <span class="pending-stamp">PENDING</span>
                     </div>
                 `).join('');
             }
+        }
+
+        // Copy Pending Students formatted for WhatsApp
+        function copyPendingWhatsApp() {
+            if (currentPendingList.length === 0) {
+                alert("All students have submitted!");
+                return;
+            }
+            const lines = [
+                `*📢 JNV Varanasi Magazine — Pending Profiles (${currentPendingList.length})*`,
+                `Please submit your profile on the portal as soon as possible:\n`
+            ];
+            currentPendingList.forEach((s, i) => {
+                lines.push(`${i + 1}. ${s.name}`);
+            });
+
+            navigator.clipboard.writeText(lines.join('\n')).then(() => {
+                const btn = document.getElementById('copy-pending-btn');
+                const original = btn.textContent;
+                btn.textContent = "✓ COPIED TO CLIPBOARD!";
+                setTimeout(() => btn.textContent = original, 2500);
+            });
+        }
+
+        // Export submitted profiles to CSV
+        function exportCSV() {
+            if (currentSubmittedList.length === 0) {
+                alert("No submitted profiles to export yet.");
+                return;
+            }
+            const headers = ['Name', 'Updated At', ...PROFILE_FIELDS.map(f => f.label)];
+            const rows = currentSubmittedList.map(s => {
+                const cells = [
+                    s.name,
+                    s.effectiveTimestamp ? new Date(s.effectiveTimestamp).toLocaleString('en-IN') : '',
+                    ...PROFILE_FIELDS.map(f => s[f.key] !== undefined && s[f.key] !== null ? String(s[f.key]) : '')
+                ];
+                return cells.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',');
+            });
+
+            const csvContent = [headers.join(','), ...rows].join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `JNV_Varanasi_Magazine_Submissions.csv`;
+            a.click();
         }
 
         function escapeHtml(str) {
