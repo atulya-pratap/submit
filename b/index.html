@@ -43,6 +43,160 @@
             color: var(--text-main);
             line-height: 1.6;
             min-height: 100vh;
+        }
+
+        /* Password Gate Screen */
+        .auth-gate {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            transition: opacity 0.35s ease;
+        }
+
+        .auth-gate.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(16px);
+        }
+
+        .auth-card.shake {
+            animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translateX(-2px); }
+            20%, 80% { transform: translateX(4px); }
+            30%, 50%, 70% { transform: translateX(-6px); }
+            40%, 60% { transform: translateX(6px); }
+        }
+
+        .auth-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(194, 166, 127, 0.12);
+            border: 1px solid rgba(194, 166, 127, 0.35);
+            color: var(--accent-gold-bright);
+            padding: 5px 14px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .auth-card h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            font-style: italic;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff 30%, #c2a67f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        .auth-subtitle {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 28px;
+        }
+
+        .auth-input-wrap {
+            position: relative;
+            margin-bottom: 14px;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 13px 46px 13px 16px;
+            background: rgba(7, 11, 20, 0.85);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(194, 166, 127, 0.15);
+        }
+
+        .auth-input.error {
+            border-color: var(--accent-rose);
+            box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.15);
+        }
+
+        .toggle-pass-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 4px;
+        }
+
+        .toggle-pass-btn:hover {
+            color: var(--accent-gold-bright);
+        }
+
+        .auth-submit {
+            width: 100%;
+            padding: 13px 18px;
+            background: linear-gradient(135deg, #c2a67f, #dfc298);
+            color: #070b14;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            cursor: pointer;
+            transition: transform 0.15s, filter 0.2s;
+        }
+
+        .auth-submit:hover {
+            filter: brightness(1.06);
+            transform: translateY(-1px);
+        }
+
+        .auth-submit:active {
+            transform: translateY(0);
+        }
+
+        .auth-error {
+            color: var(--accent-rose);
+            font-size: 0.82rem;
+            min-height: 20px;
+            margin-top: 12px;
+            font-weight: 500;
+        }
+
+        /* Dashboard Wrapper */
+        #dashboard-wrapper {
+            display: none;
             padding-bottom: 90px;
         }
 
@@ -689,138 +843,213 @@
 </head>
 <body>
 
-    <header class="header">
-        <div class="live-pill">
-            <span class="pulse-dot"></span>
-            Live Magazine Editorial Dashboard
+    <!-- Password Gate Page -->
+    <section class="auth-gate" id="auth-gate">
+        <div class="auth-card" id="auth-card">
+            <div class="auth-badge">🔒 Editorial Access Only</div>
+            <h1>JNV Varanasi</h1>
+            <p class="auth-subtitle">Enter password to access the Editorial Command Center</p>
+            <form onsubmit="event.preventDefault(); unlockDashboard();">
+                <div class="auth-input-wrap">
+                    <input
+                        type="password"
+                        id="gate-password"
+                        class="auth-input"
+                        placeholder="Enter password..."
+                        autocomplete="current-password"
+                        oninput="clearGateError()"
+                        autofocus
+                    >
+                    <button type="button" class="toggle-pass-btn" id="toggle-pass-btn" onclick="togglePasswordVisibility()" aria-label="Show or hide password">
+                        👁
+                    </button>
+                </div>
+                <button type="submit" class="auth-submit">Unlock Command Center →</button>
+            </form>
+            <div class="auth-error" id="auth-error"></div>
         </div>
-        <h1>JNV Varanasi</h1>
-        <p>Issue No. 1 • Real-Time Activity & Submission Log</p>
-    </header>
+    </section>
 
-    <main class="container">
-        <!-- Magazine Completion Banner -->
-        <div class="progress-banner">
-            <div class="progress-top">
-                <div class="progress-title">Magazine Batch Completion</div>
-                <div class="progress-stats">
-                    <strong id="progress-pct">0%</strong> Ready for Print (<span id="progress-fraction">0 / 66</span> Students)
+    <!-- Main Dashboard (Hidden until unlocked) -->
+    <div id="dashboard-wrapper">
+        <header class="header">
+            <div class="live-pill">
+                <span class="pulse-dot"></span>
+                Live Magazine Editorial Dashboard
+            </div>
+            <h1>JNV Varanasi</h1>
+            <p>Issue No. 1 • Real-Time Activity & Submission Log</p>
+        </header>
+
+        <main class="container">
+            <!-- Magazine Completion Banner -->
+            <div class="progress-banner">
+                <div class="progress-top">
+                    <div class="progress-title">Magazine Batch Completion</div>
+                    <div class="progress-stats">
+                        <strong id="progress-pct">0%</strong> Ready for Print (<span id="progress-fraction">0 / 66</span> Students)
+                    </div>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progress-fill"></div>
                 </div>
             </div>
-            <div class="progress-track">
-                <div class="progress-fill" id="progress-fill"></div>
-            </div>
-        </div>
 
-        <!-- KPI Summary -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number" id="submitted-count">0</div>
-                <div class="stat-label">Profiles Updated</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="history-count">0</div>
-                <div class="stat-label">Total History Logs</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="pending-count" style="color: var(--accent-rose);">0</div>
-                <div class="stat-label">Pending Students</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="total-count">66</div>
-                <div class="stat-label">Total Roster</div>
-            </div>
-        </div>
-
-        <!-- House Standings Leaderboard -->
-        <div class="house-grid">
-            <div class="house-card" id="house-Aravali" onclick="toggleHouseFilter('Aravali')">
-                <div class="house-top">
-                    <span>🏔️ Aravali</span>
-                    <span class="house-count" id="count-Aravali">0</span>
+            <!-- KPI Summary -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="submitted-count">0</div>
+                    <div class="stat-label">Profiles Updated</div>
                 </div>
-                <div class="house-bar"><div class="house-bar-fill" id="bar-Aravali" style="background:#38bdf8; width:0%"></div></div>
-            </div>
-            <div class="house-card" id="house-Nilgiri" onclick="toggleHouseFilter('Nilgiri')">
-                <div class="house-top">
-                    <span>🌲 Nilgiri</span>
-                    <span class="house-count" id="count-Nilgiri">0</span>
+                <div class="stat-card">
+                    <div class="stat-number" id="history-count">0</div>
+                    <div class="stat-label">Total History Logs</div>
                 </div>
-                <div class="house-bar"><div class="house-bar-fill" id="bar-Nilgiri" style="background:#34d399; width:0%"></div></div>
-            </div>
-            <div class="house-card" id="house-Shivalik" onclick="toggleHouseFilter('Shivalik')">
-                <div class="house-top">
-                    <span>🔥 Shivalik</span>
-                    <span class="house-count" id="count-Shivalik">0</span>
+                <div class="stat-card">
+                    <div class="stat-number" id="pending-count" style="color: var(--accent-rose);">0</div>
+                    <div class="stat-label">Pending Students</div>
                 </div>
-                <div class="house-bar"><div class="house-bar-fill" id="bar-Shivalik" style="background:#fb7185; width:0%"></div></div>
-            </div>
-            <div class="house-card" id="house-Udaygiri" onclick="toggleHouseFilter('Udaygiri')">
-                <div class="house-top">
-                    <span>☀️ Udaygiri</span>
-                    <span class="house-count" id="count-Udaygiri">0</span>
+                <div class="stat-card">
+                    <div class="stat-number" id="total-count">66</div>
+                    <div class="stat-label">Total Roster</div>
                 </div>
-                <div class="house-bar"><div class="house-bar-fill" id="bar-Udaygiri" style="background:#fbbf24; width:0%"></div></div>
             </div>
-        </div>
 
-        <!-- Sticky Search & Quick Jump Bar -->
-        <div class="controls">
-            <input type="text" id="search-box" class="search-input" placeholder="Search student name, house, or roll no...">
-            <div class="btn-group">
-                <a href="#section-recent" class="btn">✨ Recent</a>
-                <a href="#section-history" class="btn">🕒 History Log</a>
-                <a href="#section-pending" class="btn">⏳ Pending</a>
-                <button class="btn btn-outline-gold" onclick="exportToCSV()">⬇ Export CSV</button>
-                <button class="btn active" onclick="loadAllData()">↻ Refresh</button>
+            <!-- House Standings Leaderboard -->
+            <div class="house-grid">
+                <div class="house-card" id="house-Aravali" onclick="toggleHouseFilter('Aravali')">
+                    <div class="house-top">
+                        <span>🏔️ Aravali</span>
+                        <span class="house-count" id="count-Aravali">0</span>
+                    </div>
+                    <div class="house-bar"><div class="house-bar-fill" id="bar-Aravali" style="background:#38bdf8; width:0%"></div></div>
+                </div>
+                <div class="house-card" id="house-Nilgiri" onclick="toggleHouseFilter('Nilgiri')">
+                    <div class="house-top">
+                        <span>🌲 Nilgiri</span>
+                        <span class="house-count" id="count-Nilgiri">0</span>
+                    </div>
+                    <div class="house-bar"><div class="house-bar-fill" id="bar-Nilgiri" style="background:#34d399; width:0%"></div></div>
+                </div>
+                <div class="house-card" id="house-Shivalik" onclick="toggleHouseFilter('Shivalik')">
+                    <div class="house-top">
+                        <span>🔥 Shivalik</span>
+                        <span class="house-count" id="count-Shivalik">0</span>
+                    </div>
+                    <div class="house-bar"><div class="house-bar-fill" id="bar-Shivalik" style="background:#fb7185; width:0%"></div></div>
+                </div>
+                <div class="house-card" id="house-Udaygiri" onclick="toggleHouseFilter('Udaygiri')">
+                    <div class="house-top">
+                        <span>☀️ Udaygiri</span>
+                        <span class="house-count" id="count-Udaygiri">0</span>
+                    </div>
+                    <div class="house-bar"><div class="house-bar-fill" id="bar-Udaygiri" style="background:#fbbf24; width:0%"></div></div>
+                </div>
             </div>
-        </div>
 
-        <!-- SECTION 1: RECENT PROFILE UPDATES (DESCENDING) -->
-        <div id="section-recent" class="section-divider">
-            <div>
-                <h2>1. Recent Profile Updates</h2>
-                <p>Latest updated profiles • Click any card to inspect all fields or preview magazine card</p>
+            <!-- Sticky Search & Quick Jump Bar -->
+            <div class="controls">
+                <input type="text" id="search-box" class="search-input" placeholder="Search student name, house, or roll no...">
+                <div class="btn-group">
+                    <a href="#section-recent" class="btn">✨ Recent</a>
+                    <a href="#section-history" class="btn">🕒 History Log</a>
+                    <a href="#section-pending" class="btn">⏳ Pending</a>
+                    <button class="btn btn-outline-gold" onclick="exportToCSV()">⬇ Export CSV</button>
+                    <button class="btn active" onclick="loadAllData()">↻ Refresh</button>
+                </div>
             </div>
-            <span class="order-pill">↓ Descending (Newest First)</span>
-        </div>
-        <div id="recent-container" class="activity-list">
-            <div class="status-box">Loading recent profile updates...</div>
-        </div>
 
-        <!-- SECTION 2: FULL SUBMISSION HISTORY LOG -->
-        <div id="section-history" class="section-divider">
-            <div>
-                <h2>2. Full Submission History Log</h2>
-                <p>Every individual form submission with exact date & time (including repeat updates)</p>
+            <!-- SECTION 1: RECENT PROFILE UPDATES (DESCENDING) -->
+            <div id="section-recent" class="section-divider">
+                <div>
+                    <h2>1. Recent Profile Updates</h2>
+                    <p>Latest updated profiles • Click any card to inspect all fields or preview magazine card</p>
+                </div>
+                <span class="order-pill">↓ Descending (Newest First)</span>
             </div>
-            <span class="order-pill">↓ Descending (Newest First)</span>
-        </div>
-        <div id="history-container" class="activity-list">
-            <div class="status-box">Loading full submission history log...</div>
-        </div>
-
-        <!-- SECTION 3: PENDING STUDENTS -->
-        <div id="section-pending" class="section-divider">
-            <div>
-                <h2>3. Pending Students Roster</h2>
-                <p>Students who haven't filled out their magazine profile yet</p>
+            <div id="recent-container" class="activity-list">
+                <div class="status-box">Loading recent profile updates...</div>
             </div>
-            <button class="btn btn-outline-gold" id="copy-pending-btn" onclick="copyPendingForWhatsApp()">
-                📋 Copy Pending List for WhatsApp
-            </button>
-        </div>
-        <div id="pending-container" class="pending-grid">
-            <div class="status-box">Loading pending list...</div>
-        </div>
-    </main>
 
-    <!-- Magazine Card Preview Modal -->
-    <div class="modal-backdrop" id="preview-modal" onclick="if(event.target === this) closeModal()">
-        <div class="magazine-modal" id="modal-content"></div>
+            <!-- SECTION 2: FULL SUBMISSION HISTORY LOG -->
+            <div id="section-history" class="section-divider">
+                <div>
+                    <h2>2. Full Submission History Log</h2>
+                    <p>Every individual form submission with exact date & time (including repeat updates)</p>
+                </div>
+                <span class="order-pill">↓ Descending (Newest First)</span>
+            </div>
+            <div id="history-container" class="activity-list">
+                <div class="status-box">Loading full submission history log...</div>
+            </div>
+
+            <!-- SECTION 3: PENDING STUDENTS -->
+            <div id="section-pending" class="section-divider">
+                <div>
+                    <h2>3. Pending Students Roster</h2>
+                    <p>Students who haven't filled out their magazine profile yet</p>
+                </div>
+                <button class="btn btn-outline-gold" id="copy-pending-btn" onclick="copyPendingForWhatsApp()">
+                    📋 Copy Pending List for WhatsApp
+                </button>
+            </div>
+            <div id="pending-container" class="pending-grid">
+                <div class="status-box">Loading pending list...</div>
+            </div>
+        </main>
+
+        <!-- Magazine Card Preview Modal -->
+        <div class="modal-backdrop" id="preview-modal" onclick="if(event.target === this) closeModal()">
+            <div class="magazine-modal" id="modal-content"></div>
+        </div>
     </div>
 
     <script>
+        const PASSWORD_SECRET = "crispello";
+
+        function togglePasswordVisibility() {
+            const input = document.getElementById('gate-password');
+            const btn = document.getElementById('toggle-pass-btn');
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁';
+            }
+            input.focus();
+        }
+
+        function clearGateError() {
+            document.getElementById('gate-password').classList.remove('error');
+            document.getElementById('auth-error').textContent = '';
+        }
+
+        function unlockDashboard() {
+            const input = document.getElementById('gate-password');
+            const card = document.getElementById('auth-card');
+            const errorEl = document.getElementById('auth-error');
+
+            if (input.value === PASSWORD_SECRET) {
+                const gate = document.getElementById('auth-gate');
+                const dashboard = document.getElementById('dashboard-wrapper');
+
+                gate.classList.add('fade-out');
+                setTimeout(() => {
+                    gate.style.display = 'none';
+                    dashboard.style.display = 'block';
+                    loadAllData();
+                }, 300);
+            } else {
+                input.classList.add('error');
+                errorEl.textContent = 'Incorrect password. Please try again.';
+                card.classList.remove('shake');
+                void card.offsetWidth;
+                card.classList.add('shake');
+                input.select();
+            }
+        }
+
         const SUPABASE_URL = "https://pzplzdgdlnjfwbklxbfd.supabase.co";
         const SUPABASE_KEY = "sb_publishable_N3pli21Nl9PtLXeFkiuizg_W5Aw5MpM";
 
@@ -1274,9 +1503,6 @@
         }
 
         document.getElementById('search-box').addEventListener('input', renderAllSections);
-
-        // Initial load
-        loadAllData();
     </script>
 </body>
 </html>
