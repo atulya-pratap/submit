@@ -210,7 +210,7 @@
             <h1>Restricted Access</h1>
             <p>JNV Varanasi Magazine</p>
             <div class="password-input-wrap">
-                <input type="password" id="password-input" placeholder="Enter password..." autocomplete="off" autofocus>
+                <input type="password" id="password-input" placeholder="Enter password..." autocomplete="new-password" autofocus>
                 <button type="button" class="toggle-pw" id="toggle-pw">Show</button>
             </div>
             <button type="button" class="primary-btn" id="unlock-btn" style="width: 100%;">Unlock Dashboard</button>
@@ -268,7 +268,7 @@
     </div>
 
     <script>
-        // Password Gate Logic
+        // Password Gate Logic (Always requires password on load/refresh/reopen)
         const PAGE_PASSWORD = "crispello";
         const passwordGate = document.getElementById('password-gate');
         const mainContent = document.getElementById('main-content');
@@ -277,15 +277,26 @@
         const passwordCard = document.getElementById('password-card');
         const togglePwBtn = document.getElementById('toggle-pw');
 
+        // Clear any leftover storage from earlier versions
+        sessionStorage.removeItem('jnv_mag_unlocked');
+
+        function lockPage() {
+            passwordGate.style.display = 'flex';
+            mainContent.style.display = 'none';
+            passwordInput.value = '';
+            passwordInput.type = 'password';
+            togglePwBtn.textContent = 'Show';
+            passwordError.style.display = 'none';
+        }
+
         function unlockPage() {
             passwordGate.style.display = 'none';
             mainContent.style.display = 'block';
-            sessionStorage.setItem('jnv_mag_unlocked', 'true');
+            passwordInput.value = '';
         }
 
-        if (sessionStorage.getItem('jnv_mag_unlocked') === 'true') {
-            unlockPage();
-        }
+        // Re-lock even if browser restores page from cache (bfcache / reopened tab)
+        window.addEventListener('pageshow', lockPage);
 
         function attemptUnlock() {
             if (passwordInput.value === PAGE_PASSWORD) {
@@ -294,7 +305,7 @@
             } else {
                 passwordError.style.display = 'block';
                 passwordCard.classList.remove('shake');
-                void passwordCard.offsetWidth; // trigger reflow for animation
+                void passwordCard.offsetWidth;
                 passwordCard.classList.add('shake');
                 passwordInput.value = '';
                 passwordInput.focus();
